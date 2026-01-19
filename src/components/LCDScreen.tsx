@@ -33,28 +33,27 @@ const LETTER_MAPS: Record<string, number[]> = {
 
 interface LCDBlockProps {
   isActive: boolean;
-  isHovered: boolean;
-  onHover: () => void;
 }
 
-const LCDBlock = (props: LCDBlockProps) => {
-  const { isActive, isHovered, onHover } = props;
-  const lines = ["10101011", "01010010", "00110100", "10101011"];
+const LCDBlock = ({ isActive }: LCDBlockProps) => {
+  const lines = ["10101011", "11001010", "10110011", "01010111"];
 
   return (
     <div
-      onMouseEnter={onHover}
-      className={`select-none flex flex-col leading-[1] transition-all duration-300 w-full ${isActive ? 'text-primary' : 'text-tx-light-subtle opacity-20'
-        } ${isHovered ? 'opacity-100 scale-105' : ''}`}
+      className={`
+        select-none flex flex-col leading-[1] transition-all duration-300 w-full
+        ${isActive ? 'text-primary opacity-100' : 'text-tx-light-subtle opacity-20'} 
+        hover:!opacity-100 hover:scale-105
+      `}
       style={{
-        textShadow: isActive ? '0 0 8px rgba(239, 68, 68, 0.6)' : 'none',
+        filter: isActive ? 'drop-shadow(0 0 4px rgba(239, 68, 68, 0.8))' : 'none'
       }}
     >
       {lines.map((line, i) => (
         <span
           key={i}
           className="font-ShareTechMono text-center w-full"
-          style={{ fontSize: 'clamp(2px, 1.1vw, 30px)' }}
+          style={{ fontSize: 'clamp(2px, 1.1vw, 40px)' }}
         >
           {line}
         </span>
@@ -65,22 +64,20 @@ const LCDBlock = (props: LCDBlockProps) => {
 
 const LCDScreen = () => {
   const words = ["HELLO", "WORLD", "REACT", "FIGMA"];
-  const [wordIdx, setWordIdx] = useState(0);
-  const [hoveredPos, setHoveredPos] = useState<{ c: number; b: number } | null>(null);
+  const [wordId, setWordId] = useState(0);
   const [glitch, setGlitch] = useState(true);
 
   useEffect(() => {
-    const initialGlitchTimeout = setTimeout(() => {
-      setGlitch(false);
-    }, 400);
+    const initialGlitchTimeout = setTimeout(() => setGlitch(false), 400);
 
     const timer = setInterval(() => {
       setGlitch(true);
       setTimeout(() => {
-        setWordIdx((prev) => (prev + 1) % words.length);
+        setWordId((prev) => (prev + 1) % words.length);
         setGlitch(false);
       }, 400);
     }, 4000);
+
     return () => {
       clearTimeout(initialGlitchTimeout);
       clearInterval(timer);
@@ -90,17 +87,15 @@ const LCDScreen = () => {
   return (
     <div className="w-full flex items-center justify-center">
       <div className="flex w-full justify-between items-start gap-2 md:gap-6">
-        {words[wordIdx].split('').map((char, charIdx) => (
+        {words[wordId].split('').map((char, charId) => (
           <div
-            key={`${charIdx}-${wordIdx}`}
-            className="grid grid-cols-3 gap-x-[2px] gap-y-[2px] lg:gap-x-[6px] lg:gap-y-[6px]"
+            key={`${charId}-${wordId}`}
+            className="grid flex-1 grid-cols-3 gap-x-[2px] gap-y-[2px] lg:gap-x-[6px] lg:gap-y-[6px]"
           >
-            {LETTER_MAPS[char]?.map((isActive, blockIdx) => (
+            {LETTER_MAPS[char]?.map((isActive, blockId) => (
               <LCDBlock
-                key={blockIdx}
+                key={blockId}
                 isActive={glitch ? Math.random() > 0.5 : Boolean(isActive)}
-                isHovered={hoveredPos?.c === charIdx && hoveredPos?.b === blockIdx}
-                onHover={() => setHoveredPos({ c: charIdx, b: blockIdx })}
               />
             ))}
           </div>
