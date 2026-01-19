@@ -1,7 +1,11 @@
+import Hero from "@/components/Hero";
+import Nav from "@/components/ui/Nav";
+
 function Home() {
   return (
     <div>
-      <h1 className="text-primary font-bold">Hello World</h1>
+      <Nav />
+      <Hero />
     </div>
   );
 }

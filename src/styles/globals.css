@@ -2,3 +2,9 @@
 @import "./fonts.css";
 @import "./theme.css";
 @import "./base.css";
+
+.container {
+    max-width: 1920px;
+    margin: 0 auto;
+    padding: 0 60px;
+}
