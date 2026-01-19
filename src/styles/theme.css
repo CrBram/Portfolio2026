@@ -1,0 +1,31 @@
+@import "tailwindcss";
+@import "./fonts.css";
+
+@theme {
+  --color-tx-dark: #242424;
+  --color-tx-dark-subtle: #24242445;
+  --color-tx-light: #F8F8F8;
+  --color-tx-light-subtle: #F8F8F845;
+  --color-background: #F8F8F8;
+  --color-background-dark: #121B1C;
+  --color-primary: #E47070;
+
+  --font-google-sans: "GoogleSansCode", system-ui, sans-serif;
+  --font-micro5: "Micro5", system-ui, sans-serif;
+  --font-share-tech-mono: "ShareTechMono", system-ui, sans-serif;
+
+  --radius-lg: 0.5rem;
+  --radius-md: calc(0.5rem - 2px);
+  --radius-sm: calc(0.5rem - 4px);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-tx-dark);
+    font-family: var(--font-google-sans);
+  }
+}

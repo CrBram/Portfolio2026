@@ -1,0 +1,63 @@
+@font-face {
+  font-family: "GoogleSansCode";
+  src: url("/fonts/GoogleSansCode-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GoogleSansCode";
+  src: url("/fonts/GoogleSansCode-Italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GoogleSansCode";
+  src: url("/fonts/GoogleSansCode-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GoogleSansCode";
+  src: url("/fonts/GoogleSansCode-MediumItalic.woff2") format("woff2");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GoogleSansCode";
+  src: url("/fonts/GoogleSansCode-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GoogleSansCode";
+  src: url("/fonts/GoogleSansCode-BoldItalic.woff2") format("woff2");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Micro5";
+  src: url("/fonts/Micro5-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "ShareTechMono";
+  src: url("/fonts/ShareTechMono-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
