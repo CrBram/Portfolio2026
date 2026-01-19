@@ -64,22 +64,37 @@ const LCDBlock = ({ isActive }: LCDBlockProps) => {
 
 const LCDScreen = () => {
   const words = ["HELLO", "WORLD", "REACT", "FIGMA"];
+  const maxTicks = 6;
   const [wordId, setWordId] = useState(0);
   const [glitch, setGlitch] = useState(true);
+  const [glitchTick, setGlitchTick] = useState(0);
+
+  const runGlitch = (onComplete?: () => void) => {
+    setGlitch(true);
+
+    let ticks = 0;
+    const glitchInterval = setInterval(() => {
+      setGlitchTick((t) => t + 1);
+      ticks++;
+
+      if (ticks > maxTicks) {
+        clearInterval(glitchInterval);
+        setGlitch(false);
+        onComplete?.();
+      }
+    }, 60);
+  };
 
   useEffect(() => {
-    const initialGlitchTimeout = setTimeout(() => setGlitch(false), 400);
+    runGlitch()
 
     const timer = setInterval(() => {
-      setGlitch(true);
-      setTimeout(() => {
+      runGlitch(() => {
         setWordId((prev) => (prev + 1) % words.length);
-        setGlitch(false);
-      }, 400);
+      });
     }, 4000);
 
     return () => {
-      clearTimeout(initialGlitchTimeout);
       clearInterval(timer);
     };
   }, []);
@@ -90,11 +105,11 @@ const LCDScreen = () => {
         {words[wordId].split('').map((char, charId) => (
           <div
             key={`${charId}-${wordId}`}
-            className="grid flex-1 grid-cols-3 gap-x-[2px] gap-y-[2px] lg:gap-x-[6px] lg:gap-y-[6px]"
+            className="grid flex-1 grid-cols-3 gap-x-[2px] gap-y-[2px] lg:gap-x-[4px] lg:gap-y-[4px]"
           >
             {LETTER_MAPS[char]?.map((isActive, blockId) => (
               <LCDBlock
-                key={blockId}
+                key={`${charId}-${wordId}-${blockId}-${glitchTick}`}
                 isActive={glitch ? Math.random() > 0.5 : Boolean(isActive)}
               />
             ))}
