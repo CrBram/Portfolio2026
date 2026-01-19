@@ -27,7 +27,7 @@ const LCDBlock = (props: LCDBlockProps) => {
         hover:!opacity-100 hover:scale-105
       `}
       style={{
-        filter: isActive ? 'drop-shadow(0 0 4px rgba(239, 68, 68, 0.8))' : 'none'
+        filter: isActive ? 'drop-shadow(0 0 4px var(--color-red-subtle))' : 'none'
       }}
     >
       {lines.map((line, i) => (

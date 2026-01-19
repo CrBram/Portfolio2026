@@ -3,7 +3,7 @@ import LCDBlock from './LCDBlock';
 import { LETTER_MAPS } from '@/lib/lcd_letter-map';
 
 const LCDScreen = () => {
-  const words = ["HELLO", "WORLD", "REACT", "FIGMA"];
+  const words = ["HELLO", "WORLD", "REACT", "FIGMA", "NEXT.", "01010"];
   const maxTicks = 6;
   const glitchSpeed = 100;
   const [wordId, setWordId] = useState(0);
