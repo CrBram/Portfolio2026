@@ -1,10 +1,11 @@
 interface LCDBlockProps {
   isActive: boolean;
   glitch: boolean;
+  onClick?: () => void;
 }
 
 const LCDBlock = (props: LCDBlockProps) => {
-  const { isActive, glitch } = props;
+  const { isActive, glitch, onClick } = props;
 
   const baseLines = ["10101011", "11001010", "10110011", "01010111"];
 
@@ -19,8 +20,9 @@ const LCDBlock = (props: LCDBlockProps) => {
 
   return (
     <div
+      onClick={onClick}
       className={`
-        select-none flex flex-col leading-[1] transition-all duration-300 w-full
+        cursor-pointer select-none flex flex-col leading-[1] transition-all duration-300 w-full
         ${isActive ? 'text-primary opacity-100' : 'text-tx-light-subtle opacity-20'} 
         hover:!opacity-100 hover:scale-105
       `}
