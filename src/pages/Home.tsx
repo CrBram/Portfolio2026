@@ -1,4 +1,5 @@
 import Hero from "@/components/Hero";
+import Projects from "@/components/Projects";
 import Nav from "@/components/ui/Nav";
 
 function Home() {
@@ -6,6 +7,7 @@ function Home() {
     <div>
       <Nav />
       <Hero />
+      <Projects />
     </div>
   );
 }
