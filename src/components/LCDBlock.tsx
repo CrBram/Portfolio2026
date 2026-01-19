@@ -8,8 +8,10 @@ const LCDBlock = (props: LCDBlockProps) => {
 
   const baseLines = ["10101011", "11001010", "10110011", "01010111"];
 
-  const randomizeLine = (length: number) =>
-    Array.from({ length }, () => (Math.random() > 0.5 ? "1" : "0")).join("");
+  const randomizeLine = (length: number, intensity = 1) =>
+    Array.from({ length }, () =>
+      Math.random() > 0.5 * intensity ? "1" : "0"
+    ).join("");
 
   const lines = glitch
     ? baseLines.map((line) => randomizeLine(line.length))
