@@ -16,11 +16,20 @@ const Nav = () => {
             <img src="/images/BC_LOGO_WHITE.svg" alt="Logo" className="w-10 h-10" />
           </Link>
           <div className="flex items-center gap-6">
-            {
-              links.map((link) => (
-                <LinkButton key={link.href} href={link.href}>{link.label}</LinkButton>
-              ))
-            }
+            <button
+              type="button"
+              className="md:hidden p-2 -m-2"
+              aria-label="Open menu"
+            >
+              <img src="/images/hamburger_white.png" alt="" className="w-6 h-6" />
+            </button>
+            <div className="hidden md:flex items-center gap-6">
+              {
+                links.map((link) => (
+                  <LinkButton key={link.href} href={link.href}>{link.label}</LinkButton>
+                ))
+              }
+            </div>
           </div>
         </div>
       </div>
