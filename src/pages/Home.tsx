@@ -1,5 +1,6 @@
 import Hero from "@/components/Hero";
 import Projects from "@/components/Projects";
+import Skills from "@/components/Skills";
 import Nav from "@/components/ui/Nav";
 
 function Home() {
@@ -8,6 +9,7 @@ function Home() {
       <Nav />
       <Hero />
       <Projects />
+      <Skills />
     </div>
   );
 }

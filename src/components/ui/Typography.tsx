@@ -17,7 +17,7 @@ const Typography = (props: TypographyProps) => {
     h4: 'text-xl font-bold',
     h5: 'text-lg font-bold',
     h6: 'text-base font-bold',
-    p: 'text-base font-normal',
+    p: 'text-tx-light text-sm sm:text-md md:text-lg text-justify',
     span: 'text-base font-normal',
     div: 'text-base font-normal',
   }

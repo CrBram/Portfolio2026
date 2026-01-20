@@ -4,7 +4,7 @@ import LinkButton from "./LinkButton"
 const Nav = () => {
   const links = [
     { href: "#projects", label: "PROJECTS" },
-    { href: "#experience", label: "EXPERIENCE" },
+    { href: "#skills", label: "SKILLS" },
     { href: "#contact", label: "CONTACT" },
   ]
 
