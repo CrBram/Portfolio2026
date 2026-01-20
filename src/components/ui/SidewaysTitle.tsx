@@ -8,7 +8,7 @@ const SidewaysTitle = (props: SidewaysTitleProps) => {
   const { children } = props;
 
   return (
-    <Typography variant="h2" sideways>
+    <Typography className="self-start" variant="h2" sideways>
       {children}
     </Typography>
   )
