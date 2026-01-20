@@ -22,7 +22,7 @@ const LCDBlock = (props: LCDBlockProps) => {
     <div
       onClick={onClick}
       className={`
-        cursor-pointer select-none flex flex-col leading-[1] transition-all duration-300 w-full
+        cursor-pointer select-none flex flex-col leading-[1] transition-all duration-100 w-full
         ${isActive ? 'text-primary opacity-100' : 'text-tx-light-subtle opacity-20'} 
         hover:!opacity-100 hover:scale-105
       `}
