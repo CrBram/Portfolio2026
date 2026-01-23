@@ -11,15 +11,15 @@ const Nav = () => {
   ]
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 ${isOverWhiteBackground ? "bg-background" : "bg-background-dark"}`}>
+    <nav className={`fixed top-0 left-0 right-0 z-50`} >
       <div className="container">
         <div className="flex items-center justify-between py-5">
           <Link to="/">
-            <img
-              src="/images/BC_LOGO_WHITE.svg"
-              alt="Logo"
-              className={`w-10 h-10 transition-all duration-200 ${isOverWhiteBackground ? "brightness-0" : ""}`}
-            />
+            {isOverWhiteBackground ? (
+              <img src="/images/BC_LOGO_DARK.svg" alt="Logo" className="w-10 h-10 transition-all duration-200" />
+            ) : (
+              <img src="/images/BC_LOGO_WHITE.svg" alt="Logo" className="w-10 h-10 transition-all duration-200" />
+            )}
           </Link>
           <div className="flex items-center gap-6">
             <button

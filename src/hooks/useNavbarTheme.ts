@@ -7,13 +7,15 @@ export function useNavbarTheme() {
     const checkBackground = () => {
       const sections = document.querySelectorAll("section")
       let currentSection: Element | null = null
-      
-      for (const section of sections) {
-        const rect = section.getBoundingClientRect()
-        
-        if (rect.top <= 100 && rect.bottom >= 0) {
-          currentSection = section
-          break
+            
+      if (!currentSection) {
+        for (const section of sections) {
+          const rect = section.getBoundingClientRect()
+          
+          if (rect.top <= 40 && rect.bottom >= 40) {
+            currentSection = section
+            break
+          }
         }
       }
 
