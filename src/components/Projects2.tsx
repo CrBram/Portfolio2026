@@ -4,6 +4,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import HorizontalProjectScroll from './HorizontalProjectScroll'
 import Button from './ui/Button'
 
+gsap.registerPlugin(ScrollTrigger)
+
 interface Project {
   id: number
   title: string
@@ -26,8 +28,8 @@ const projects: Project[] = [
   },
   {
     id: 3,
-    title: 'ONTZORG',
-    backgroundImage: '/images/projects/ontzorg_background.jpg',
+    title: 'ORIENT CONFIGURATOR',
+    backgroundImage: '/images/projects/orient_background.png',
     link: '#',
   },
 ]
@@ -37,126 +39,97 @@ const Projects2 = () => {
   const containerRef = useRef<HTMLDivElement>(null)
   const [currentProjectIndex, setCurrentProjectIndex] = useState(0)
 
+  console.log(currentProjectIndex)
+
   useEffect(() => {
     const section = sectionRef.current
     const container = containerRef.current
     if (!section || !container) return
 
-    // Calculate the scroll distance needed (each project takes viewport height)
-    const calculateScrollDistance = () => projects.length * window.innerHeight
+    let viewportWidth = window.innerWidth
+    let totalWidth = (projects.length - 1) * viewportWidth
 
-    // Initialize all project elements with GSAP
-    const projectElements = projects.map((_, index) => {
-      const element = container.querySelector(`[data-project-index="${index}"]`) as HTMLElement
-      if (element) {
-        gsap.set(element, { opacity: 0, y: 50 })
-      }
-      return element
-    })
+    const calculateScrollDistance = () =>
+      projects.length * window.innerHeight
 
-    // Create ScrollTrigger that pins the section
+    const snapPoints = projects.map(
+      (_, i) => i / (projects.length - 1)
+    )
+
+    gsap.set(container, { x: 0 })
+
     const scrollTrigger = ScrollTrigger.create({
       trigger: section,
       start: 'top top',
       end: () => `+=${calculateScrollDistance()}`,
       pin: true,
-      pinSpacing: true,
+      scrub: 0.6,
       anticipatePin: 1,
+      invalidateOnRefresh: true,
+
+      snap: {
+        snapTo: snapPoints,
+        duration: { min: 0.25, max: 0.6 },
+        ease: 'power3.out',
+        inertia: true,
+      },
+
+      onRefreshInit: () => {
+        viewportWidth = window.innerWidth
+        totalWidth = (projects.length - 1) * viewportWidth
+      },
+
       onUpdate: (self) => {
-        // Calculate which project should be visible based on scroll progress
         const progress = self.progress
-        const projectIndex = Math.min(
-          Math.floor(progress * projects.length),
-          projects.length - 1
+
+        gsap.set(container, {
+          x: -progress * totalWidth,
+          force3D: true,
+        })
+
+        const projectIndex = Math.round(
+          progress * (projects.length - 1)
         )
+
         setCurrentProjectIndex(projectIndex)
       },
     })
 
-    // Animate project transitions with smooth fade
-    const triggers: ScrollTrigger[] = []
-    projects.forEach((_, index) => {
-      const projectElement = projectElements[index]
-      if (!projectElement) return
-
-      const trigger = ScrollTrigger.create({
-        trigger: section,
-        start: 'top top',
-        end: () => `+=${calculateScrollDistance()}`,
-        scrub: true,
-        onUpdate: (self) => {
-          const progress = self.progress
-          const startProgress = index / projects.length
-          const endProgress = (index + 1) / projects.length
-
-          let opacity = 0
-          let y = 50
-
-          if (progress >= startProgress && progress < endProgress) {
-            const localProgress = (progress - startProgress) / (endProgress - startProgress)
-            // Fade in during first half, fade out during second half
-            if (localProgress < 0.5) {
-              opacity = localProgress * 2
-              y = 50 - localProgress * 100
-            } else {
-              opacity = 2 - localProgress * 2
-              y = (localProgress - 0.5) * -100
-            }
-          } else if (progress < startProgress) {
-            opacity = 0
-            y = 50
-          } else {
-            opacity = 0
-            y = -50
-          }
-
-          gsap.set(projectElement, { opacity, y })
-        },
-      })
-      triggers.push(trigger)
-    })
-
-    // Handle window resize
     const handleResize = () => {
       ScrollTrigger.refresh()
     }
+
     window.addEventListener('resize', handleResize)
 
     return () => {
       window.removeEventListener('resize', handleResize)
       scrollTrigger.kill()
-      triggers.forEach((trigger) => trigger.kill())
-      ScrollTrigger.getAll().forEach((trigger) => {
-        if (trigger.vars.trigger === section) {
-          trigger.kill()
-        }
-      })
     }
   }, [])
-
-  const currentProject = projects[currentProjectIndex]
 
   return (
     <section
       ref={sectionRef}
-      className="h-screen bg-cover bg-center bg-no-repeat bg-background relative overflow-hidden"
-      style={{
-        backgroundImage: currentProject?.backgroundImage
-          ? `url('${currentProject.backgroundImage}')`
-          : undefined,
-      }}
+      className="h-screen bg-background relative overflow-hidden"
     >
-      <div className="absolute inset-0 bg-background-dark/20"></div>
-      <div ref={containerRef} className="h-full w-full">
+      <div
+        ref={containerRef}
+        className="h-full flex"
+        style={{ width: `${projects.length * 100}vw` }}
+      >
         {projects.map((project, index) => (
           <div
             key={project.id}
             data-project-index={index}
-            className="absolute inset-0 flex flex-col justify-between"
+            className="h-full w-screen flex-shrink-0 flex flex-col justify-between bg-cover bg-center bg-no-repeat relative"
             style={{
-              pointerEvents: index === currentProjectIndex ? 'auto' : 'none',
+              backgroundImage: project.backgroundImage
+                ? `url('${project.backgroundImage}')`
+                : undefined,
             }}
           >
+            <div className="absolute inset-0 bg-background-dark/20" />
+
             <div className="pt-24 relative z-10">
               <HorizontalProjectScroll
                 text={project.title}
@@ -166,6 +139,7 @@ const Projects2 = () => {
                 duplicates={6}
               />
             </div>
+
             <div className="container py-8! md:py-12! relative z-10">
               <div className="flex flex-wrap justify-between md:pt-136 pt-120">
                 <div className="w-full md:w-auto">
@@ -176,6 +150,7 @@ const Projects2 = () => {
                     #{String(project.id).padStart(2, '0')}
                   </p>
                 </div>
+
                 <Button
                   className="w-full md:w-auto"
                   text="VIEW PROJECT"
