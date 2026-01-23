@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 
 interface HorizontalProjectScrollProps {
   text: string
@@ -20,7 +20,7 @@ const HorizontalProjectScroll = ({
   const scrollContainerRef = useRef<HTMLDivElement>(null)
   const itemRef = useRef<HTMLDivElement>(null)
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const scrollContainer = scrollContainerRef.current
     const item = itemRef.current
     if (!scrollContainer || !item) return
@@ -31,11 +31,10 @@ const HorizontalProjectScroll = ({
     }
 
     updateAnimation()
-    window.addEventListener('resize', updateAnimation)
 
+    window.addEventListener('resize', updateAnimation)
     return () => window.removeEventListener('resize', updateAnimation)
   }, [duplicates, text, imageSrc, imageAlt])
-
 
   useEffect(() => {
     const scrollContainer = scrollContainerRef.current
