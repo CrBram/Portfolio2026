@@ -20,3 +20,18 @@
         padding: 0 20px;
     }
 }
+
+@keyframes scroll-x {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+    100% {
+        transform: translate3d(calc(var(--item-width) * -1), 0, 0);
+    }
+}
+
+.animate-scroll-x {
+    animation: scroll-x var(--animation-duration, 10s) linear infinite;
+    will-change: transform;
+    --item-width: 1000px;
+}

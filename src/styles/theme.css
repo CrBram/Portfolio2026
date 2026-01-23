@@ -15,7 +15,8 @@
   --font-google-sans: "GoogleSansCode", system-ui, sans-serif;
   --font-micro5: "Micro5", system-ui, sans-serif;
   --font-share-tech-mono: "ShareTechMono", system-ui, sans-serif;
-
+  --font-tronica: "Tronica", system-ui, sans-serif;
+  
   --radius-lg: 0.5rem;
   --radius-md: calc(0.5rem - 2px);
   --radius-sm: calc(0.5rem - 4px);
