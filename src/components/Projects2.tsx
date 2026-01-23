@@ -19,13 +19,13 @@ const projects: Project[] = [
     id: 1,
     title: 'ORIENT CONFIGURATOR',
     backgroundImage: '/images/projects/orient_background.png',
-    link: '#',
+    link: 'https://orient-configurator.vercel.app/',
   },
   {
     id: 2,
     title: 'LES ARCS',
     backgroundImage: '/images/projects/les-arcs_background.png',
-    link: '#',
+    link: 'https://les-arcs-interactive.vercel.app/',
     bgDark: true,
   },
   {
@@ -84,8 +84,8 @@ const Projects2 = () => {
             }
           })
 
-          // Only snap if we've scrolled at least 40% of the way to the next snap point
-          const threshold = snapDistance * 0.4
+          // Only snap if we've scrolled at least 50% of the way to the next snap point
+          const threshold = snapDistance * 0.5
           if (minDistance < threshold) {
             return closestSnap
           }
