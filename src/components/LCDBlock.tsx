@@ -34,7 +34,7 @@ const LCDBlock = (props: LCDBlockProps) => {
         <span
           key={i}
           className="font-ShareTechMono text-center w-full"
-          style={{ fontSize: 'clamp(2px, 1.1vw, 40px)' }}
+          style={{ fontSize: 'clamp(2px, 1.1vw, 21.12px)' }}
         >
           {line}
         </span>

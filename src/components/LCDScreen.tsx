@@ -61,8 +61,8 @@ const LCDScreen = () => {
   }, [isManual]);
 
   return (
-    <div className="w-full flex items-center justify-center">
-      <div className="flex w-full justify-between items-start gap-2 md:gap-6">
+    <div className="w-full flex items-center justify-center max-w-full">
+      <div className="flex w-full justify-between items-start gap-2 md:gap-6 max-w-full">
         {words[wordId].split('').map((char, charId) => (
           <div
             key={`${charId}-${wordId}`}
