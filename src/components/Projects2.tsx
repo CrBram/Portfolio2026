@@ -68,10 +68,33 @@ const Projects2 = () => {
       invalidateOnRefresh: true,
 
       snap: {
-        snapTo: snapPoints,
-        duration: { min: 0.25, max: 0.6 },
-        ease: 'power3.out',
-        inertia: true,
+        snapTo: (progress) => {
+          const snapDistance = 1 / (projects.length - 1)
+
+          let closestSnap = 0
+          let minDistance = Infinity
+
+          snapPoints.forEach((snap) => {
+            const distance = Math.abs(snap - progress)
+            if (distance < minDistance) {
+              minDistance = distance
+              closestSnap = snap
+            }
+          })
+
+          // Only snap if we've scrolled at least 40% of the way to the next snap point
+          const threshold = snapDistance * 0.4
+          if (minDistance < threshold) {
+            return closestSnap
+          }
+
+          // Don't snap if we're in the middle zone
+          return progress
+        },
+        duration: { min: 0.5, max: 0.9 },
+        ease: 'power2.out',
+        delay: 0.15,
+        directional: false,
       },
 
       onRefreshInit: () => {
