@@ -160,8 +160,7 @@ const Projects2 = () => {
                 text={project.title}
                 imageSrc="/images/red_dot.png"
                 imageAlt="Dot"
-                speed={10}
-                duplicates={6}
+                speed={200}
               />
             </div>
 
