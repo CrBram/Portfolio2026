@@ -1,30 +1,169 @@
+import { useEffect, useRef, useState } from 'react'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import HorizontalProjectScroll from './HorizontalProjectScroll'
 import Button from './ui/Button'
 
+gsap.registerPlugin(ScrollTrigger)
+
+interface Project {
+  id: number
+  title: string
+  backgroundImage?: string
+  link?: string
+}
+
+const projects: Project[] = [
+  {
+    id: 1,
+    title: 'ORIENT CONFIGURATOR',
+    backgroundImage: '/images/projects/orient_background.png',
+    link: '#',
+  },
+  {
+    id: 2,
+    title: 'LES ARCS',
+    backgroundImage: '/images/projects/les-arcs_background.png',
+    link: '#',
+  },
+  {
+    id: 3,
+    title: 'ORIENT CONFIGURATOR',
+    backgroundImage: '/images/projects/orient_background.png',
+    link: '#',
+  },
+]
+
 const Projects2 = () => {
+  const sectionRef = useRef<HTMLElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const [currentProjectIndex, setCurrentProjectIndex] = useState(0)
+
+  console.log(currentProjectIndex)
+
+  useEffect(() => {
+    const section = sectionRef.current
+    const container = containerRef.current
+    if (!section || !container) return
+
+    let viewportWidth = window.innerWidth
+    let totalWidth = (projects.length - 1) * viewportWidth
+
+    const calculateScrollDistance = () =>
+      projects.length * window.innerHeight
+
+    const snapPoints = projects.map(
+      (_, i) => i / (projects.length - 1)
+    )
+
+    gsap.set(container, { x: 0 })
+
+    const scrollTrigger = ScrollTrigger.create({
+      trigger: section,
+      start: 'top top',
+      end: () => `+=${calculateScrollDistance()}`,
+      pin: true,
+      scrub: 0.6,
+      anticipatePin: 1,
+      invalidateOnRefresh: true,
+
+      snap: {
+        snapTo: snapPoints,
+        duration: { min: 0.25, max: 0.6 },
+        ease: 'power3.out',
+        inertia: true,
+      },
+
+      onRefreshInit: () => {
+        viewportWidth = window.innerWidth
+        totalWidth = (projects.length - 1) * viewportWidth
+      },
+
+      onUpdate: (self) => {
+        const progress = self.progress
+
+        gsap.set(container, {
+          x: -progress * totalWidth,
+          force3D: true,
+        })
+
+        const projectIndex = Math.round(
+          progress * (projects.length - 1)
+        )
+
+        setCurrentProjectIndex(projectIndex)
+      },
+    })
+
+    const handleResize = () => {
+      ScrollTrigger.refresh()
+    }
+
+    window.addEventListener('resize', handleResize)
+
+    return () => {
+      window.removeEventListener('resize', handleResize)
+      scrollTrigger.kill()
+    }
+  }, [])
+
   return (
     <section
-      className="h-screen bg-cover bg-center bg-no-repeat bg-background relative overflow-hidden"
-      style={{ backgroundImage: "url('/images/projects/orient_background.png')" }}
+      ref={sectionRef}
+      className="h-screen bg-background relative overflow-hidden"
     >
-      <div className="absolute inset-0 bg-background-dark/20"></div>
-      <div className="pt-24 relative z-10">
-        <HorizontalProjectScroll
-          text="ORIENT CONFIGURATOR"
-          imageSrc="/images/red_dot.png"
-          imageAlt="Dot"
-          speed={10}
-          duplicates={2}
-        />
-      </div>
-      <div className="container py-8! md:py-12! relative z-10">
-        <div className="flex flex-wrap justify-between md:pt-136 pt-120">
-          <div className="w-full md:w-auto">
-            <p className="font-share-tech-mono text-tx-dark text-base sm:text-lg md:text-xl">SELECTED PROJECTS</p>
-            <p className="font-micro5 text-primary text-8xl md:text-9xl -mt-6">#01</p>
+      <div
+        ref={containerRef}
+        className="h-full flex"
+        style={{ width: `${projects.length * 100}vw` }}
+      >
+        {projects.map((project, index) => (
+          <div
+            key={project.id}
+            data-project-index={index}
+            className="h-full w-screen flex-shrink-0 flex flex-col justify-between bg-cover bg-center bg-no-repeat relative"
+            style={{
+              backgroundImage: project.backgroundImage
+                ? `url('${project.backgroundImage}')`
+                : undefined,
+            }}
+          >
+            <div className="absolute inset-0 bg-background-dark/20" />
+
+            <div className="pt-24 relative z-10">
+              <HorizontalProjectScroll
+                text={project.title}
+                imageSrc="/images/red_dot.png"
+                imageAlt="Dot"
+                speed={10}
+                duplicates={6}
+              />
+            </div>
+
+            <div className="container py-8! md:py-12! relative z-10">
+              <div className="flex flex-wrap justify-between md:pt-136 pt-120">
+                <div className="w-full md:w-auto">
+                  <p className="font-share-tech-mono text-tx-dark text-base sm:text-lg md:text-xl">
+                    SELECTED PROJECTS
+                  </p>
+                  <p className="font-micro5 text-primary text-8xl md:text-9xl -mt-6">
+                    #{String(project.id).padStart(2, '0')}
+                  </p>
+                </div>
+
+                <Button
+                  className="w-full md:w-auto"
+                  text="VIEW PROJECT"
+                  onClick={() => {
+                    if (project.link) {
+                      window.open(project.link, '_blank')
+                    }
+                  }}
+                />
+              </div>
+            </div>
           </div>
-          <Button className="w-full md:w-auto" text="VIEW PROJECT" onClick={() => { }} />
-        </div>
+        ))}
       </div>
     </section>
   )

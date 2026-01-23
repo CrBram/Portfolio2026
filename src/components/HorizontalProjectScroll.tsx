@@ -43,8 +43,15 @@ const HorizontalProjectScroll = ({
   }, [speed])
 
   return (
-    <div className={`overflow-hidden ${className}`}>
-      <div ref={scrollContainerRef} className="flex animate-scroll-x">
+    <div className={`overflow-hidden ${className}`} style={{ isolation: 'isolate' }}>
+      <div
+        ref={scrollContainerRef}
+        className="flex animate-scroll-x"
+        style={{
+          willChange: 'transform',
+          transform: 'translateZ(0)',
+        }}
+      >
         {Array.from({ length: duplicates }).map((_, i) => (
           <div
             key={i}
