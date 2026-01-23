@@ -11,6 +11,7 @@ interface Project {
   title: string
   backgroundImage?: string
   link?: string
+  bgDark?: boolean
 }
 
 const projects: Project[] = [
@@ -25,6 +26,7 @@ const projects: Project[] = [
     title: 'LES ARCS',
     backgroundImage: '/images/projects/les-arcs_background.png',
     link: '#',
+    bgDark: true,
   },
   {
     id: 3,
@@ -133,7 +135,7 @@ const Projects2 = () => {
   return (
     <section
       ref={sectionRef}
-      className="h-screen bg-background relative overflow-hidden"
+      className={`h-screen ${projects[currentProjectIndex].bgDark ? 'bg-background-dark' : 'bg-background'} relative overflow-hidden`}
     >
       <div
         ref={containerRef}
@@ -166,7 +168,7 @@ const Projects2 = () => {
             <div className="container py-8! md:py-12! relative z-10">
               <div className="flex flex-wrap justify-between md:pt-136 pt-120">
                 <div className="w-full md:w-auto">
-                  <p className="font-share-tech-mono text-tx-dark text-base sm:text-lg md:text-xl">
+                  <p className={`font-share-tech-mono ${project.bgDark ? 'text-tx-light' : 'text-tx-dark'} text-base sm:text-lg md:text-xl`}>
                     SELECTED PROJECTS
                   </p>
                   <p className="font-micro5 text-primary text-8xl md:text-9xl -mt-6">
