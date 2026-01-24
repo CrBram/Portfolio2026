@@ -9,8 +9,22 @@ interface LinkButtonProps {
 const LinkButton = (props: LinkButtonProps) => {
   const { href, children, isDarkText = false } = props;
 
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (href.startsWith('#')) {
+      e.preventDefault();
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  };
+
   return (
-    <Link to={href} className={`${isDarkText ? "text-tx-dark" : "text-tx-light"} font-share-tech-mono hover:text-primary transition-colors duration-100`}>
+    <Link
+      to={href}
+      onClick={handleClick}
+      className={`${isDarkText ? "text-tx-dark" : "text-tx-light"} font-share-tech-mono hover:text-primary transition-colors duration-100`}
+    >
       <span className="text-primary">[</span>{children}<span className="text-primary">]</span>
     </Link>
   )
