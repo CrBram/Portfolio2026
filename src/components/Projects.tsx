@@ -132,6 +132,8 @@ const Projects2 = () => {
     }
   }, [])
 
+  const progressPercentage = ((currentProjectIndex + 1) / projects.length) * 100
+
   return (
     <section
       ref={sectionRef}
@@ -188,6 +190,13 @@ const Projects2 = () => {
             </div>
           </div>
         ))}
+      </div>
+
+      <div className="absolute bottom-0 left-0 right-0 h-1.5 bg-background-dark/30 z-20">
+        <div
+          className="h-full bg-primary transition-all duration-500 ease-out"
+          style={{ width: `${progressPercentage}%` }}
+        />
       </div>
     </section>
   )
