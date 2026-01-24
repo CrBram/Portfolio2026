@@ -12,6 +12,7 @@ interface Project {
   backgroundImage?: string
   link?: string
   bgDark?: boolean
+  tags?: string[]
 }
 
 const projects: Project[] = [
@@ -20,6 +21,7 @@ const projects: Project[] = [
     title: 'ORIENT CONFIGURATOR',
     backgroundImage: '/images/projects/orient_background.png',
     link: 'https://orient-configurator.vercel.app/',
+    tags: ['React', 'Next.js', 'Tailwind CSS', 'TypeScript', 'Three.js'],
   },
   {
     id: 2,
@@ -27,16 +29,18 @@ const projects: Project[] = [
     backgroundImage: '/images/projects/les-arcs_background.png',
     link: 'https://les-arcs-interactive.vercel.app/',
     bgDark: true,
+    tags: ['React', 'Next.js', 'Tailwind CSS', 'TypeScript', 'Three.js'],
   },
   {
     id: 3,
     title: 'ORIENT CONFIGURATOR',
     backgroundImage: '/images/projects/orient_background.png',
     link: '#',
+    tags: ['React', 'Next.js', 'Tailwind CSS', 'TypeScript', 'Three.js'],
   },
 ]
 
-const Projects2 = () => {
+const Projects = () => {
   const sectionRef = useRef<HTMLElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
   const [currentProjectIndex, setCurrentProjectIndex] = useState(0)
@@ -203,4 +207,4 @@ const Projects2 = () => {
   )
 }
 
-export default Projects2
+export default Projects
