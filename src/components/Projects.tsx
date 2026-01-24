@@ -1,54 +1,196 @@
-import BracketWord from "./ui/BracketWord"
-import SidewaysTitle from "./ui/SidewaysTitle"
+import { useEffect, useRef, useState } from 'react'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import HorizontalProjectScroll from './HorizontalProjectScroll'
+import Button from './ui/Button'
 
-const projects = [
+gsap.registerPlugin(ScrollTrigger)
+
+interface Project {
+  id: number
+  title: string
+  backgroundImage?: string
+  link?: string
+  bgDark?: boolean
+}
+
+const projects: Project[] = [
   {
-    name: "ORIENT CONFIGURATOR"
+    id: 1,
+    title: 'ORIENT CONFIGURATOR',
+    backgroundImage: '/images/projects/orient_background.png',
+    link: 'https://orient-configurator.vercel.app/',
   },
   {
-    name: "LES ARCS INTERACTIVE"
+    id: 2,
+    title: 'LES ARCS',
+    backgroundImage: '/images/projects/les-arcs_background.png',
+    link: 'https://les-arcs-interactive.vercel.app/',
+    bgDark: true,
   },
   {
-    name: "ONTZORG"
+    id: 3,
+    title: 'ORIENT CONFIGURATOR',
+    backgroundImage: '/images/projects/orient_background.png',
+    link: '#',
   },
-  {
-    name: "BLITZPOWER"
-  },
-  {
-    name: "ELEVATE TRAINING"
-  }
 ]
 
-const Projects = () => {
+const Projects2 = () => {
+  const sectionRef = useRef<HTMLElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const [currentProjectIndex, setCurrentProjectIndex] = useState(0)
+
+  console.log(currentProjectIndex)
+
+  useEffect(() => {
+    const section = sectionRef.current
+    const container = containerRef.current
+    if (!section || !container) return
+
+    let viewportWidth = window.innerWidth
+    let totalWidth = (projects.length - 1) * viewportWidth
+
+    const calculateScrollDistance = () =>
+      projects.length * window.innerHeight
+
+    const snapPoints = projects.map(
+      (_, i) => i / (projects.length - 1)
+    )
+
+    gsap.set(container, { x: 0 })
+
+    const scrollTrigger = ScrollTrigger.create({
+      trigger: section,
+      start: 'top top',
+      end: () => `+=${calculateScrollDistance()}`,
+      pin: true,
+      scrub: 0.6,
+      anticipatePin: 1,
+      invalidateOnRefresh: true,
+
+      snap: {
+        snapTo: (progress) => {
+          const snapDistance = 1 / (projects.length - 1)
+
+          let closestSnap = 0
+          let minDistance = Infinity
+
+          snapPoints.forEach((snap) => {
+            const distance = Math.abs(snap - progress)
+            if (distance < minDistance) {
+              minDistance = distance
+              closestSnap = snap
+            }
+          })
+
+          // Only snap if we've scrolled at least 50% of the way to the next snap point
+          const threshold = snapDistance * 0.5
+          if (minDistance < threshold) {
+            return closestSnap
+          }
+
+          // Don't snap if we're in the middle zone
+          return progress
+        },
+        duration: { min: 0.5, max: 0.9 },
+        ease: 'power2.out',
+        delay: 0.15,
+        directional: false,
+      },
+
+      onRefreshInit: () => {
+        viewportWidth = window.innerWidth
+        totalWidth = (projects.length - 1) * viewportWidth
+      },
+
+      onUpdate: (self) => {
+        const progress = self.progress
+
+        gsap.set(container, {
+          x: -progress * totalWidth,
+          force3D: true,
+        })
+
+        const projectIndex = Math.round(
+          progress * (projects.length - 1)
+        )
+
+        setCurrentProjectIndex(projectIndex)
+      },
+    })
+
+    const handleResize = () => {
+      ScrollTrigger.refresh()
+    }
+
+    window.addEventListener('resize', handleResize)
+
+    return () => {
+      window.removeEventListener('resize', handleResize)
+      scrollTrigger.kill()
+    }
+  }, [])
+
   return (
-    <section className="bg-background min-h-screen">
-      <div className="container py-8! md:py-12!">
-        <div className="flex gap-12 mb-6">
-          <div className="flex items-center gap-4">
-            <img src="/images/icons/doc_open.svg" alt="doc" className="w-8 h-8" />
-            <BracketWord>TECHNOLOGY</BracketWord>
+    <section
+      ref={sectionRef}
+      className={`h-screen ${projects[currentProjectIndex].bgDark ? 'bg-background-dark' : 'bg-background'} relative overflow-hidden`}
+    >
+      <div
+        ref={containerRef}
+        className="h-full flex"
+        style={{ width: `${projects.length * 100}vw` }}
+      >
+        {projects.map((project, index) => (
+          <div
+            key={project.id}
+            data-project-index={index}
+            className="h-full w-screen flex-shrink-0 flex flex-col justify-between bg-cover bg-center bg-no-repeat relative"
+            style={{
+              backgroundImage: project.backgroundImage
+                ? `url('${project.backgroundImage}')`
+                : undefined,
+            }}
+          >
+            <div className="absolute inset-0 bg-background-dark/20" />
+
+            <div className="pt-24 relative z-10">
+              <HorizontalProjectScroll
+                text={project.title}
+                imageSrc="/images/red_dot.png"
+                imageAlt="Dot"
+                speed={200}
+              />
+            </div>
+
+            <div className="container py-8! md:py-12! relative z-10">
+              <div className="flex flex-wrap justify-between md:pt-136 pt-120">
+                <div className="w-full md:w-auto">
+                  <p className={`font-share-tech-mono ${project.bgDark ? 'text-tx-light' : 'text-tx-dark'} text-base sm:text-lg md:text-xl`}>
+                    SELECTED PROJECTS
+                  </p>
+                  <p className="font-micro5 text-primary text-8xl md:text-9xl -mt-6">
+                    #{String(project.id).padStart(2, '0')}
+                  </p>
+                </div>
+
+                <Button
+                  className="w-full md:w-auto"
+                  text="VIEW PROJECT"
+                  onClick={() => {
+                    if (project.link) {
+                      window.open(project.link, '_blank')
+                    }
+                  }}
+                />
+              </div>
+            </div>
           </div>
-          <div className="flex items-center gap-4">
-            <img src="/images/icons/doc_closed.svg" alt="doc" className="w-8 h-8" />
-            <BracketWord>TYPE</BracketWord>
-          </div>
-        </div>
-        <div className="flex gap-4">
-          <SidewaysTitle>PROJECTS</SidewaysTitle>
-          <div>
-            <ul>
-              {projects.map((p, i) => (
-                <li key={i}>
-                  <p className={`${i != 0 ? "text-tx-dark-subtle" : ""} text-tx-dark font-bold text-2xl sm:text-4xl md:text-5xl mb-2`}>{p.name}</p>
-                </li>
-              )
-              )}
-            </ul>
-          </div>
-        </div>
+        ))}
       </div>
     </section>
   )
 }
 
-export default Projects
+export default Projects2

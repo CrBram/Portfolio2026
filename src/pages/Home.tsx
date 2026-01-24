@@ -1,5 +1,5 @@
 import Hero from "@/components/Hero";
-import Projects2 from "@/components/Projects2";
+import Projects from "@/components/Projects";
 import Skills from "@/components/Skills";
 import Nav from "@/components/ui/Nav";
 
@@ -8,7 +8,7 @@ function Home() {
     <div>
       <Nav />
       <Hero />
-      <Projects2 />
+      <Projects />
       <Skills />
     </div>
   );
