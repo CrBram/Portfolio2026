@@ -21,7 +21,7 @@ const projects: Project[] = [
     title: 'ORIENT CONFIGURATOR',
     backgroundImage: '/images/projects/orient_background.png',
     link: 'https://orient-configurator.vercel.app/',
-    tags: ['React', 'Next.js', 'Tailwind CSS', 'TypeScript', 'Three.js'],
+    tags: ['React', 'Next.js', 'Tailwind', 'TypeScript', 'Three.js'],
   },
   {
     id: 2,
@@ -29,14 +29,14 @@ const projects: Project[] = [
     backgroundImage: '/images/projects/les-arcs_background.png',
     link: 'https://les-arcs-interactive.vercel.app/',
     bgDark: true,
-    tags: ['React', 'Next.js', 'Tailwind CSS', 'TypeScript', 'Three.js'],
+    tags: ['React', 'Next.js', 'Tailwind', 'TypeScript', 'Three.js'],
   },
   {
     id: 3,
     title: 'ORIENT CONFIGURATOR',
     backgroundImage: '/images/projects/orient_background.png',
     link: '#',
-    tags: ['React', 'Next.js', 'Tailwind CSS', 'TypeScript', 'Three.js'],
+    tags: ['React', 'Next.js', 'Tailwind', 'TypeScript', 'Three.js'],
   },
 ]
 
@@ -153,7 +153,7 @@ const Projects = () => {
           <div
             key={project.id}
             data-project-index={index}
-            className="h-full w-screen flex-shrink-0 flex flex-col justify-between bg-cover bg-center bg-no-repeat relative"
+            className="h-full w-screen flex-shrink-0 flex flex-col bg-cover bg-center bg-no-repeat relative uppercase"
             style={{
               backgroundImage: project.backgroundImage
                 ? `url('${project.backgroundImage}')`
@@ -171,8 +171,15 @@ const Projects = () => {
               />
             </div>
 
-            <div className="container py-8! md:py-12! relative z-10">
-              <div className="flex flex-wrap justify-between md:pt-136 pt-120">
+            <div className="container pt-8! md:pt-12! relative z-10 flex-1 flex flex-col justify-between">
+              <div className="md:max-w-[25%] flex flex-wrap gap-2">
+                {project.tags?.map((tag) => (
+                  <div key={tag} className="hover:scale-105 transition-all duration-100 w-fit text-tx-dark font-share-tech-mono text-lg bg-[#DEDEDE] px-2">
+                    {tag}
+                  </div>
+                ))}
+              </div>
+              <div className="flex flex-wrap justify-between">
                 <div className="w-full md:w-auto">
                   <p className={`font-share-tech-mono ${project.bgDark ? 'text-tx-light' : 'text-tx-dark'} text-base sm:text-lg md:text-xl`}>
                     SELECTED PROJECTS
