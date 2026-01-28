@@ -171,7 +171,7 @@ const Projects = () => {
               />
             </div>
 
-            <div className="container pt-8! md:pt-12! relative z-10 flex-1 flex flex-col justify-between">
+            <div className="container pb-16! md:pb-0! pt-8! md:pt-12! relative z-10 flex-1 flex flex-col justify-between">
               <div className="md:max-w-[25%] flex flex-wrap gap-2">
                 {project.tags?.map((tag) => (
                   <div key={tag} className="hover:scale-105 transition-all duration-100 w-fit text-tx-dark font-share-tech-mono text-lg bg-[#DEDEDE] px-2">
