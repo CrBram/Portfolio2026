@@ -40,7 +40,7 @@ export const projects: Project[] = [
   {
     id: 5,
     title: "BLITZPOWER",
-    backgroundImage: "/images/projects/les-arcs_background.png",
+    backgroundImage: "/images/projects/orient_background.png",
     link: "#",
     tags: ["Next.js", "Nodejs", "Prisma", "Material UI"],
     year: 2023,
@@ -56,7 +56,7 @@ export const projects: Project[] = [
   {
     id: 7,
     title: "ONTZORG",
-    backgroundImage: "/images/projects/les-arcs_background.png",
+    backgroundImage: "/images/projects/orient_background.png",
     link: "#",
     tags: ["Next.js", "Nodejs", "Prisma", "Material UI"],
     year: 2022,

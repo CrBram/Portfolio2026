@@ -1,3 +1,4 @@
+import { useState } from "react"
 import Chip from "./ui/Chip"
 import SidewaysTitle from "./ui/SidewaysTitle"
 import { projects } from '@/data/projects'
@@ -6,6 +7,9 @@ import { useIsMobile } from "@/hooks/useIsMobile"
 
 const Projects = () => {
   const isMobile = useIsMobile()
+  const [hoveredProjectId, setHoveredProjectId] = useState<number | null>(null)
+
+  const hoveredProject = projects.find((p) => p.id === hoveredProjectId)
 
   return (
     <section id="projects" className="bg-background h-screen">
@@ -35,6 +39,12 @@ const Projects = () => {
                             e.preventDefault()
                             window.open(project.link, '_blank')
                           }
+                        }}
+                        onMouseEnter={() => setHoveredProjectId(project.id)}
+                        onMouseLeave={() => {
+                          setHoveredProjectId((current) =>
+                            current === project.id ? null : current
+                          )
                         }}
                         role={project.link ? 'link' : undefined}
                         tabIndex={project.link ? 0 : -1}
@@ -106,6 +116,12 @@ const Projects = () => {
                               window.open(project.link, '_blank')
                             }
                           }}
+                          onMouseEnter={() => setHoveredProjectId(project.id)}
+                          onMouseLeave={() => {
+                            setHoveredProjectId((current) =>
+                              current === project.id ? null : current
+                            )
+                          }}
                           role={project.link ? 'link' : undefined}
                           tabIndex={project.link ? 0 : -1}
                         >
@@ -142,6 +158,20 @@ const Projects = () => {
 
           </div>
         </div>
+
+        {hoveredProject && hoveredProject.backgroundImage && (
+          <div className="pointer-events-none fixed inset-x-0 bottom-6 md:bottom-8 z-20">
+            <div className="container flex justify-end pr-4 md:pr-8">
+              <div className="w-126 h-96 bg-background-dark-subtle overflow-hidden">
+                <img
+                  src={hoveredProject.backgroundImage}
+                  alt={hoveredProject.title}
+                  className="h-full w-full object-cover"
+                />
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </section>
   )
