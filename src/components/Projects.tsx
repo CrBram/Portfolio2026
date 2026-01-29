@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useMemo, useState } from "react"
 import Chip from "./ui/Chip"
 import SidewaysTitle from "./ui/SidewaysTitle"
 import { projects } from '@/data/projects'
@@ -10,6 +10,19 @@ const Projects = () => {
   const [hoveredProjectId, setHoveredProjectId] = useState<number | null>(null)
 
   const hoveredProject = projects.find((p) => p.id === hoveredProjectId)
+  const activePreviewSrc = hoveredProject?.backgroundImage ?? null
+
+  const previewImages = useMemo(() => {
+    const seen = new Set<string>()
+    return projects
+      .map((p) => p.backgroundImage)
+      .filter((src): src is string => Boolean(src))
+      .filter((src) => {
+        if (seen.has(src)) return false
+        seen.add(src)
+        return true
+      })
+  }, [])
 
   return (
     <section id="projects" className="bg-background h-screen">
@@ -159,19 +172,30 @@ const Projects = () => {
           </div>
         </div>
 
-        {hoveredProject && hoveredProject.backgroundImage && (
-          <div className="pointer-events-none fixed inset-x-0 bottom-6 md:bottom-8 z-20">
-            <div className="container flex justify-end pr-4 md:pr-8">
-              <div className="w-126 h-96 bg-background-dark-subtle overflow-hidden">
+        <div
+          className={`pointer-events-none fixed inset-x-0 bottom-6 md:bottom-8 z-20 transition-[opacity,transform] duration-200 ease-out ${activePreviewSrc
+            ? 'opacity-100 translate-y-0 scale-100'
+            : 'opacity-0'
+            }`}
+          aria-hidden="true"
+        >
+          <div className="container flex justify-end pr-4 md:pr-8">
+            <div className="relative w-126 h-96 bg-background-dark-subtle overflow-hidden">
+              {previewImages.map((src) => (
                 <img
-                  src={hoveredProject.backgroundImage}
-                  alt={hoveredProject.title}
-                  className="h-full w-full object-cover"
+                  key={src}
+                  src={src}
+                  alt=""
+                  loading="eager"
+                  className={`absolute inset-0 h-full w-full object-cover transform-gpu transition-[transform,opacity] duration-300 ease-in-out ${activePreviewSrc === src
+                    ? 'opacity-100 scale-100'
+                    : 'opacity-0 scale-[1.03]'
+                    }`}
                 />
-              </div>
+              ))}
             </div>
           </div>
-        )}
+        </div>
       </div>
     </section>
   )
