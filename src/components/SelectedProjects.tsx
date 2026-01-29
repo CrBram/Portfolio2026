@@ -3,44 +3,13 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import HorizontalProjectScroll from './HorizontalProjectScroll'
 import Button from './ui/Button'
+import { projects as projectsData } from '@/data/projects'
+
+const projects = projectsData.filter((project) => project.selected)
 
 gsap.registerPlugin(ScrollTrigger)
 
-interface Project {
-  id: number
-  title: string
-  backgroundImage?: string
-  link?: string
-  bgDark?: boolean
-  tags?: string[]
-}
-
-const projects: Project[] = [
-  {
-    id: 1,
-    title: 'ORIENT CONFIGURATOR',
-    backgroundImage: '/images/projects/orient_background.png',
-    link: 'https://orient-configurator.vercel.app/',
-    tags: ['React', 'Next.js', 'Tailwind', 'TypeScript', 'Three.js'],
-  },
-  {
-    id: 2,
-    title: 'LES ARCS',
-    backgroundImage: '/images/projects/les-arcs_background.png',
-    link: 'https://les-arcs-interactive.vercel.app/',
-    bgDark: true,
-    tags: ['React', 'Next.js', 'Tailwind', 'TypeScript', 'Three.js'],
-  },
-  {
-    id: 3,
-    title: 'ORIENT CONFIGURATOR',
-    backgroundImage: '/images/projects/orient_background.png',
-    link: '#',
-    tags: ['React', 'Next.js', 'Tailwind', 'TypeScript', 'Three.js'],
-  },
-]
-
-const Projects = () => {
+const SelectedProjects = () => {
   const sectionRef = useRef<HTMLElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
   const [currentProjectIndex, setCurrentProjectIndex] = useState(0)
@@ -212,4 +181,4 @@ const Projects = () => {
   )
 }
 
-export default Projects
+export default SelectedProjects
