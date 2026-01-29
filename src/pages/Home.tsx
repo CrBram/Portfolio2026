@@ -9,8 +9,10 @@ function Home() {
     <div>
       <Nav />
       <Hero />
-      <SelectedProjects />
-      <Projects />
+      <section id="projects">
+        <SelectedProjects />
+        <Projects />
+      </section>
       <Skills />
     </div>
   );
