@@ -3,11 +3,12 @@ import LinkButton from "./LinkButton"
 import { useNavbarTheme } from "@/hooks/useNavbarTheme"
 
 const Nav = () => {
-  const isOverWhiteBackground = useNavbarTheme()
+  const { isOverWhiteBackground, currentSectionId } = useNavbarTheme()
+
   const links = [
-    { href: "#projects", label: "PROJECTS" },
-    { href: "#skills", label: "SKILLS" },
-    { href: "#contact", label: "CONTACT" },
+    { href: "#projects", label: "PROJECTS", activeTags: ["selected-projects", "all-projects"] },
+    { href: "#skills", label: "SKILLS", activeTags: ["skills"] },
+    { href: "#contact", label: "CONTACT", activeTags: ["contact"] },
   ]
 
   return (
@@ -37,9 +38,19 @@ const Nav = () => {
             </button>
             <div className="hidden md:flex items-center gap-6">
               {
-                links.map((link) => (
-                  <LinkButton key={link.href} href={link.href} isDarkText={isOverWhiteBackground}>{link.label}</LinkButton>
-                ))
+                links.map((link) => {
+                  const isActive = currentSectionId ? link.activeTags.includes(currentSectionId) : false
+                  return (
+                    <LinkButton
+                      key={link.href}
+                      href={link.href}
+                      isDarkText={isOverWhiteBackground}
+                      isActive={isActive}
+                    >
+                      {link.label}
+                    </LinkButton>
+                  )
+                })
               }
             </div>
           </div>

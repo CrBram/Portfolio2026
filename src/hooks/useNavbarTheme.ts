@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 
 export function useNavbarTheme() {
   const [isOverWhiteBackground, setIsOverWhiteBackground] = useState(false);
+  const [currentSectionId, setCurrentSectionId] = useState<string | null>(null);
 
   useEffect(() => {
     const checkBackground = () => {
@@ -32,8 +33,12 @@ export function useNavbarTheme() {
         const hasWhiteBackground =
           currentSection.classList.contains("bg-background");
         setIsOverWhiteBackground(hasWhiteBackground);
+
+        const sectionId = currentSection.id || null;
+        setCurrentSectionId(sectionId);
       } else {
         setIsOverWhiteBackground(false);
+        setCurrentSectionId(null);
       }
     };
 
@@ -60,5 +65,5 @@ export function useNavbarTheme() {
     };
   }, []);
 
-  return isOverWhiteBackground;
+  return { isOverWhiteBackground, currentSectionId };
 }

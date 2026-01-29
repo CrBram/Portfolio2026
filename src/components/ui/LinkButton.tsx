@@ -4,10 +4,11 @@ interface LinkButtonProps {
   href: string;
   children: React.ReactNode;
   isDarkText?: boolean;
+  isActive?: boolean;
 }
 
 const LinkButton = (props: LinkButtonProps) => {
-  const { href, children, isDarkText = false } = props;
+  const { href, children, isDarkText = false, isActive = false } = props;
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (href.startsWith('#')) {
@@ -23,7 +24,12 @@ const LinkButton = (props: LinkButtonProps) => {
     <Link
       to={href}
       onClick={handleClick}
-      className={`${isDarkText ? "text-tx-dark" : "text-tx-light"} font-share-tech-mono hover:text-primary transition-colors duration-100`}
+      className={`${isActive
+        ? "text-primary"
+        : isDarkText
+          ? "text-tx-dark"
+          : "text-tx-light"
+        } font-share-tech-mono hover:text-primary transition-colors duration-100`}
     >
       <span className="text-primary">[</span>{children}<span className="text-primary">]</span>
     </Link>

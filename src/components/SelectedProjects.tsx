@@ -108,6 +108,7 @@ const SelectedProjects = () => {
 
   return (
     <section
+      id="selected-projects"
       ref={sectionRef}
       className={`h-screen ${projects[currentProjectIndex].bgDark ? 'bg-background-dark' : 'bg-background'} relative overflow-hidden`}
     >
