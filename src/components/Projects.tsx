@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react"
+import { useState } from "react"
 import Chip from "./ui/Chip"
 import SidewaysTitle from "./ui/SidewaysTitle"
 import { projects } from '@/data/projects'
@@ -14,7 +14,7 @@ const Projects = () => {
   const hoveredProject = projects.find((p) => p.id === hoveredProjectId)
   const activePreviewSrc = hoveredProject?.backgroundImage ?? null
 
-  const previewImages = useMemo(() => {
+  const previewImages = (() => {
     const seen = new Set<string>()
     return projects
       .map((p) => p.backgroundImage)
@@ -24,17 +24,17 @@ const Projects = () => {
         seen.add(src)
         return true
       })
-  }, [])
+  })()
 
-  const allTags = useMemo(() => {
+  const allTags = (() => {
     const tagSet = new Set<string>()
     projects.forEach((project) => {
       project.tags?.forEach((tag) => tagSet.add(tag))
     })
     return Array.from(tagSet)
-  }, [])
+  })()
 
-  const filteredProjects = useMemo(() => {
+  const filteredProjects = (() => {
     if (selectedTags.length === 0) return projects
 
     return projects.filter((project) => {
@@ -42,7 +42,7 @@ const Projects = () => {
       if (tags.length === 0) return false
       return tags.some((tag) => selectedTags.includes(tag))
     })
-  }, [selectedTags])
+  })()
 
   const toggleFilters = () => {
     setFiltersOpen((prev) => {
