@@ -45,8 +45,6 @@ const Projects = () => {
   const containerRef = useRef<HTMLDivElement>(null)
   const [currentProjectIndex, setCurrentProjectIndex] = useState(0)
 
-  console.log(currentProjectIndex)
-
   useEffect(() => {
     const section = sectionRef.current
     const container = containerRef.current
