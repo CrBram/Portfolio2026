@@ -8,6 +8,8 @@ import { useIsMobile } from "@/hooks/useIsMobile"
 const Projects = () => {
   const isMobile = useIsMobile()
   const [hoveredProjectId, setHoveredProjectId] = useState<number | null>(null)
+  const [selectedTags, setSelectedTags] = useState<string[]>([])
+  const [filtersOpen, setFiltersOpen] = useState<boolean>(false)
 
   const hoveredProject = projects.find((p) => p.id === hoveredProjectId)
   const activePreviewSrc = hoveredProject?.backgroundImage ?? null
@@ -24,16 +26,89 @@ const Projects = () => {
       })
   }, [])
 
+  const allTags = useMemo(() => {
+    const tagSet = new Set<string>()
+    projects.forEach((project) => {
+      project.tags?.forEach((tag) => tagSet.add(tag))
+    })
+    return Array.from(tagSet)
+  }, [])
+
+  const filteredProjects = useMemo(() => {
+    if (selectedTags.length === 0) return projects
+
+    return projects.filter((project) => {
+      const tags = project.tags ?? []
+      if (tags.length === 0) return false
+      return tags.some((tag) => selectedTags.includes(tag))
+    })
+  }, [selectedTags])
+
+  const toggleFilters = () => {
+    setFiltersOpen((prev) => {
+      const next = !prev
+      if (!next) {
+        setSelectedTags([])
+      }
+      return next
+    })
+  }
+
   return (
     <section id="projects" className="bg-background h-screen">
       <div className="container py-16! md:py-24!">
+        <div className="mb-8 flex flex-col gap-3 md:flex-row md:items-center md:gap-y-3 md:gap-x-8 flex-wrap">
+          <button
+            type="button"
+            onClick={toggleFilters}
+            className="w-fit cursor-pointer flex items-center gap-3 text-left focus:outline-none focus-visible:ring-1 focus-visible:ring-primary/80"
+          >
+            <img
+              src={filtersOpen ? "/images/icons/doc_open.svg" : "/images/icons/doc_closed.svg"}
+              alt={filtersOpen ? "Hide tag filters" : "Show tag filters"}
+              className="h-8 w-8"
+            />
+            <span className="font-share-tech-mono hover:text-primary transition-colors duration-100">
+              <span className="text-primary">[</span>
+              TAGS
+              <span className="text-primary">]</span>
+            </span>
+          </button>
+          {filtersOpen && (
+            <div className="flex flex-wrap gap-2">
+              {allTags.map((tag) => {
+                const isSelected = selectedTags.includes(tag)
+                return (
+                  <button
+                    key={tag}
+                    type="button"
+                    onClick={() => {
+                      setSelectedTags((current) =>
+                        current.includes(tag)
+                          ? current.filter((t) => t !== tag)
+                          : [...current, tag]
+                      )
+                    }}
+                    className="rounded-sm focus:outline-none focus-visible:ring-1 focus-visible:ring-primary/80 cursor-pointer"
+                  >
+                    <Chip
+                      content={tag}
+                      size="sm"
+                      className={`transition-opacity ${isSelected ? 'opacity-100' : 'opacity-30 hover:opacity-60'}`}
+                    />
+                  </button>
+                )
+              })}
+            </div>
+          )}
+        </div>
         <div className="md:flex justify-between">
           <div className="w-full flex gap-4">
             <SidewaysTitle>PROJECTS</SidewaysTitle>
             {isMobile ? (
               <div className="w-full">
                 <div className="w-full divide-y divide-tx-dark">
-                  {projects.map((project) => {
+                  {filteredProjects.map((project) => {
                     const tags = project.tags ?? []
                     const maxTags = 2
                     const visibleTags = tags.slice(0, maxTags)
@@ -114,7 +189,7 @@ const Projects = () => {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-tx-dark">
-                    {projects.map((project) => {
+                    {filteredProjects.map((project) => {
                       return (
                         <tr
                           key={project.id}
