@@ -187,7 +187,7 @@ const Projects = () => {
                   src={src}
                   alt=""
                   loading="eager"
-                  className={`absolute inset-0 h-full w-full object-cover transform-gpu transition-[transform,opacity] duration-300 ease-in-out ${activePreviewSrc === src
+                  className={`absolute inset-0 h-full w-full object-cover transform-gpu transition-[transform,opacity] duration-300 ease-out ${activePreviewSrc === src
                     ? 'opacity-100 scale-100'
                     : 'opacity-0 scale-[1.03]'
                     }`}
