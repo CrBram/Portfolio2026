@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import HorizontalProjectScroll from './HorizontalProjectScroll'
 import Button from './ui/Button'
 import { projects as projectsData } from '@/data/projects'
+import Chip from './ui/Chip'
 
 const projects = projectsData.filter((project) => project.selected)
 
@@ -141,9 +142,7 @@ const SelectedProjects = () => {
             <div className="container pb-16! md:pb-0! pt-8! md:pt-12! relative z-10 flex-1 flex flex-col justify-between">
               <div className="md:max-w-[25%] flex flex-wrap gap-2">
                 {project.tags?.map((tag) => (
-                  <div key={tag} className="hover:scale-105 transition-all duration-100 w-fit text-tx-dark font-share-tech-mono text-lg bg-[#DEDEDE] px-2">
-                    {tag}
-                  </div>
+                  <Chip key={tag} content={tag} />
                 ))}
               </div>
               <div className="flex flex-wrap justify-between">

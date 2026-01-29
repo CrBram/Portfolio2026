@@ -12,7 +12,7 @@ const Typography = (props: TypographyProps) => {
 
   const variants = {
     h1: 'text-tx-light font-bold text-6xl sm:text-7xl md:text-9xl -ml-0.5 sm:-ml-1 md:-ml-1.5',
-    h2: 'text-primary font-share-tech-mono text-2xl sm:text-3xl md:text-5xl',
+    h2: 'text-primary font-tronica text-2xl sm:text-3xl md:text-5xl',
     h3: 'text-2xl font-bold',
     h4: 'text-xl font-bold',
     h5: 'text-lg font-bold',
