@@ -123,11 +123,22 @@ const SelectedProjects = () => {
             data-project-index={index}
             className="h-full w-screen flex-shrink-0 flex flex-col bg-cover bg-center bg-no-repeat relative uppercase"
             style={{
-              backgroundImage: project.backgroundImage
+              backgroundImage: !project.backgroundVideo && project.backgroundImage
                 ? `url('${project.backgroundImage}')`
                 : undefined,
             }}
           >
+            {project.backgroundVideo && (
+              <video
+                className="absolute inset-0 w-full h-full object-cover"
+                autoPlay
+                loop
+                muted
+                playsInline
+              >
+                <source src={project.backgroundVideo} type="video/mp4" />
+              </video>
+            )}
             <div className="absolute inset-0 bg-background-dark/20" />
 
             <div className="pt-24 relative z-10">

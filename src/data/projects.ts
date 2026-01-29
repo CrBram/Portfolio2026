@@ -2,6 +2,7 @@ interface Project {
   id: number;
   title: string;
   backgroundImage?: string;
+  backgroundVideo?: string;
   link?: string;
   bgDark?: boolean;
   tags?: string[];
@@ -14,6 +15,7 @@ export const projects: Project[] = [
     id: 1,
     title: "ORIENT CONFIGURATOR",
     backgroundImage: "/images/projects/orient_background.png",
+    backgroundVideo: "/videos/orient_preview_video.mp4",
     link: "https://orient-configurator.vercel.app/",
     tags: ["React", "Next.js", "Tailwind", "TypeScript", "Three.js"],
     selected: true,
@@ -23,6 +25,7 @@ export const projects: Project[] = [
     id: 2,
     title: "LES ARCS",
     backgroundImage: "/images/projects/les-arcs_background.png",
+    backgroundVideo: "/videos/les-arcs_preview_video.mp4",
     link: "https://les-arcs-interactive.vercel.app/",
     bgDark: true,
     tags: ["React", "Next.js", "Tailwind", "TypeScript", "Three.js", "Rapier"],
