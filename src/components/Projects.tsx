@@ -14,21 +14,38 @@ const Projects = () => {
               <table className="w-full table-fixed divide-y">
                 <thead>
                   <tr className="text-tx-dark font-share-tech-mono text-xs sm:text-sm uppercase tracking-wider">
-                    <th className="text-left text-xs font-normal pb-0.5 w-[30%]">
+                    <th className="pl-4 text-left text-xs font-normal pb-0.5 w-[30%]">
                       PROJECT NAME
                     </th>
-                    <th className="text-left text-xs font-normal pb-0.5 w-[60%]">
+                    <th className="text-left text-xs font-normal pb-0.5 w-[55%]">
                       TAGS
                     </th>
-                    <th className="text-left text-xs font-normal pb-0.5 w-[10%]">
+                    <th className="text-left text-xs font-normal pb-0.5 w-[12%]">
                       YEAR
+                    </th>
+                    <th className="text-right text-xs font-normal pb-0.5 w-[3%]">
                     </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-tx-dark">
                   {projects.map((project) => (
-                    <tr key={project.id} className="align-middle">
-                      <td className="py-4 pr-4 text-tx-dark text-sm sm:text-base uppercase">
+                    <tr
+                      key={project.id}
+                      className="align-middle hover:bg-primary/60 transition-colors duration-100 cursor-pointer"
+                      onClick={() => {
+                        if (project.link) window.open(project.link, '_blank')
+                      }}
+                      onKeyDown={(e) => {
+                        if (!project.link) return
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault()
+                          window.open(project.link, '_blank')
+                        }
+                      }}
+                      role={project.link ? 'link' : undefined}
+                      tabIndex={project.link ? 0 : -1}
+                    >
+                      <td className="pl-4 py-4 pr-4 text-tx-dark text-sm sm:text-base uppercase">
                         {project.title}
                       </td>
                       <td className="py-4 pr-4 text-tx-dark text-sm sm:text-base">
@@ -40,6 +57,14 @@ const Projects = () => {
                       </td>
                       <td className="py-4 text-left text-tx-dark text-sm sm:text-base">
                         {project.year}
+                      </td>
+                      <td className="py-4 pr-2 text-right">
+                        <img
+                          src="/images/icons/arrow.svg"
+                          alt=""
+                          aria-hidden="true"
+                          className="ml-auto h-3 w-3 opacity-80"
+                        />
                       </td>
                     </tr>
                   ))}
