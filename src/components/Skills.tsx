@@ -3,16 +3,16 @@ import Typography from "./ui/Typography"
 
 const skills = [
   {
-    title: "BRANDING",
-    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam mattis, metus nec posuere efficitur, nisl enim euismod urna, sed pretium eros ipsum sed sem. Sed lectus ipsum, placerat ac odio nec, pretium placerat nulla. Curabitur ut volutpat mi, sed fringilla dui. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Etiam lobortis scelerisque leo ut consectetur. Fusce commodo, eros at pulvinar condimentum, ex ipsum maximus enim, vitae egestas nunc nibh sit amet orci. Proin augue diam."
-  },
-  {
     title: "DESIGN",
-    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam mattis, metus nec posuere efficitur, nisl enim euismod urna, sed pretium eros ipsum sed sem. Sed lectus ipsum, placerat ac odio nec, pretium placerat nulla. Curabitur ut volutpat mi, sed fringilla dui. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Etiam lobortis scelerisque leo ut consectetur. Fusce commodo, eros at pulvinar condimentum, ex ipsum maximus enim, vitae egestas nunc nibh sit amet orci. Proin augue diam."
+    content: "Design is the foundation of every project, shaping both the user experience and the overall success of a product. I use Figma to create visually appealing, functional, and user-centered designs that balance creativity with usability. My process focuses on clarity, consistency, and thoughtful interaction, ensuring that every element serves a clear purpose. From wireframing and prototyping to final UI design, I strive to create interfaces that are intuitive, accessible, and engaging. By combining design principles with attention to detail, I aim to deliver solutions that not only look great but also provide a seamless and meaningful experience for users."
   },
   {
-    title: "SOFTWARE",
-    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam mattis, metus nec posuere efficitur, nisl enim euismod urna, sed pretium eros ipsum sed sem. Sed lectus ipsum, placerat ac odio nec, pretium placerat nulla. Curabitur ut volutpat mi, sed fringilla dui. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Etiam lobortis scelerisque leo ut consectetur. Fusce commodo, eros at pulvinar condimentum, ex ipsum maximus enim, vitae egestas nunc nibh sit amet orci. Proin augue diam."
+    title: "DEVELOP",
+    content: "Development is where design comes to life through clean, efficient, and scalable code. I use modern technologies such as React, Next.js, Tailwind CSS, and TypeScript to transform concepts and designs into fully functional, responsive applications. My focus is on writing maintainable code, optimizing performance, and ensuring a smooth user experience across different devices and platforms. I follow best practices and modern development standards to build reliable, high-quality solutions. By combining strong technical skills with an understanding of design principles, I aim to create products that are both visually polished and technically robust."
+  },
+  {
+    title: "DELIVER",
+    content: "Beyond the technical side, I place strong value on clear and consistent communication with clients throughout the delivery phase. I enjoy keeping clients involved, providing updates, explaining technical decisions in an easy-to-understand way, and making sure their expectations are fully met. I believe that strong communication builds trust and leads to better results, allowing me to deliver projects that not only function well but also align closely with the client’s goals and vision."
   },
 ]
 
