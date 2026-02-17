@@ -1,9 +1,24 @@
 import { useRef } from "react"
+import { useForm } from "react-hook-form"
 import Marquee from "react-fast-marquee"
 import Draggable from "react-draggable"
+import Field from "./ui/Field"
+import Button from "./ui/Button"
+
+type ContactForm = {
+  name: string
+  function: string
+  email: string
+  message: string
+}
 
 const Contact = () => {
   const nodeRef = useRef<HTMLDivElement>(null)
+  const { register, handleSubmit, formState: { errors } } = useForm<ContactForm>()
+
+  const onSubmit = (data: ContactForm) => {
+    console.log(data)
+  }
 
   return (
     <section id="contact" className="h-screen bg-background relative">
@@ -46,7 +61,26 @@ const Contact = () => {
                   <img src="/images/icons/x_icon.svg" alt="close" className="w-4 h-4" />
                 </button>
               </div>
-              <div className="bg-background-dark rounded-sm p-4 flex-1">
+              <div className="bg-background-dark rounded-sm p-4 flex-1 flex flex-col min-h-0">
+                <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col justify-between flex-1 min-h-0">
+                  <div className="flex flex-col gap-4">
+                    <Field label="NAME" error={errors.name?.message} required>
+                      <input {...register("name", { required: "Required" })} />
+                    </Field>
+                    <Field label="FUNCTION">
+                      <input {...register("function")} />
+                    </Field>
+                    <Field label="EMAIL">
+                      <input {...register("email")} />
+                    </Field>
+                    <div className="mt-4">
+                      <Field label="MESSAGE" error={errors.message?.message} required>
+                        <textarea {...register("message", { required: "Required" })} rows={4} className="resize-none" />
+                      </Field>
+                    </div>
+                  </div>
+                  <Button className="w-full flex justify-center text-2xl md:text-3xl" text="SEND MESSAGE" onClick={handleSubmit(onSubmit)} />
+                </form>
               </div>
             </div>
           </Draggable>

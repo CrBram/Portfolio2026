@@ -4,20 +4,20 @@
 @theme {
   --color-tx-dark: #242424;
   --color-tx-dark-subtle: #24242445;
-  --color-tx-light: #F8F8F8;
-  --color-tx-light-subtle: #F8F8F845;
-  --color-background: #F8F8F8;
-  --color-background-dark: #121B1C;
-  --color-background-dark-subtle: #121B1C90;
-  --color-primary: #E47070;
-  --color-primary-hover: #D46060;
+  --color-tx-light: #f8f8f8;
+  --color-tx-light-subtle: #f8f8f845;
+  --color-background: #f8f8f8;
+  --color-background-dark: #121b1c;
+  --color-background-dark-subtle: #121b1c90;
+  --color-primary: #e47070;
+  --color-primary-hover: #d46060;
   --color-red-subtle: rgba(239, 68, 68, 0.8);
 
   --font-google-sans: "GoogleSansCode", system-ui, sans-serif;
   --font-micro5: "Micro5", system-ui, sans-serif;
   --font-share-tech-mono: "ShareTechMono", system-ui, sans-serif;
   --font-tronica: "Tronica", system-ui, sans-serif;
-  
+
   --radius-lg: 0.5rem;
   --radius-md: calc(0.5rem - 2px);
   --radius-sm: calc(0.5rem - 4px);
