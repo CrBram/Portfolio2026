@@ -1,3 +1,4 @@
+import Contact from "@/components/Contact";
 import Hero from "@/components/Hero";
 import Projects from "@/components/Projects";
 import SelectedProjects from "@/components/SelectedProjects";
@@ -14,6 +15,7 @@ function Home() {
         <Projects />
       </div>
       <Skills />
+      <Contact />
     </div>
   );
 }
