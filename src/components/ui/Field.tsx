@@ -15,9 +15,10 @@ const Field = ({ label, error, required, children }: FieldProps) => {
   const childProps = React.isValidElement(children) ? (children.props as { className?: string; placeholder?: string }) : undefined
   const childClassName = childProps?.className
   const isTextarea = React.isValidElement(children) && children.type === "textarea"
+  const baseClass = isTextarea ? inputBaseClass.replace("pt-5", "pt-0") : inputBaseClass
   const styledChild = React.isValidElement(children)
     ? React.cloneElement(children, {
-      className: twMerge(inputBaseClass, childClassName),
+      className: twMerge(baseClass, childClassName),
       placeholder: " ",
     } as Record<string, unknown>)
     : children

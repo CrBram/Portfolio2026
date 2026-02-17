@@ -1,9 +1,11 @@
-import { useRef } from "react"
+import { useRef, useState } from "react"
 import { useForm } from "react-hook-form"
 import Marquee from "react-fast-marquee"
 import Draggable from "react-draggable"
 import Field from "./ui/Field"
 import Button from "./ui/Button"
+
+const FORMSPARK_URL = "https://submit-form.com/kmbymzSUe"
 
 type ContactForm = {
   name: string
@@ -14,10 +16,23 @@ type ContactForm = {
 
 const Contact = () => {
   const nodeRef = useRef<HTMLDivElement>(null)
-  const { register, handleSubmit, formState: { errors } } = useForm<ContactForm>()
+  const { register, handleSubmit, formState: { errors }, reset } = useForm<ContactForm>()
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle")
 
-  const onSubmit = (data: ContactForm) => {
-    console.log(data)
+  const onSubmit = async (data: ContactForm) => {
+    setStatus("sending")
+    try {
+      const res = await fetch(FORMSPARK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(data),
+      })
+      if (!res.ok) throw new Error("Submit failed")
+      setStatus("success")
+      reset()
+    } catch {
+      setStatus("error")
+    }
   }
 
   return (
@@ -79,7 +94,14 @@ const Contact = () => {
                       </Field>
                     </div>
                   </div>
-                  <Button className="w-full flex justify-center text-2xl md:text-3xl" text="SEND MESSAGE" onClick={handleSubmit(onSubmit)} />
+                  <div className="flex flex-col gap-2">
+                    <Button
+                      className="w-full flex justify-center text-xl md:text-2xl disabled:opacity-70 disabled:cursor-not-allowed"
+                      text={status === "sending" ? "SENDING…" : "SEND MESSAGE"}
+                      onClick={handleSubmit(onSubmit)}
+                      disabled={status === "sending"}
+                    />
+                  </div>
                 </form>
               </div>
             </div>
