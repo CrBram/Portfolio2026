@@ -4,6 +4,7 @@ import Projects from "@/components/Projects";
 import SelectedProjects from "@/components/SelectedProjects";
 import Skills from "@/components/Skills";
 import Nav from "@/components/ui/Nav";
+import Footer from "@/components/ui/Footer";
 
 function Home() {
   return (
@@ -16,6 +17,7 @@ function Home() {
       </div>
       <Skills />
       <Contact />
+      <Footer />
     </div>
   );
 }

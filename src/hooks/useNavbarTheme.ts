@@ -1,19 +1,25 @@
 import { useState, useEffect } from "react";
 
-export function useNavbarTheme() {
+const REFERENCE_OFFSET = 40;
+
+export function useNavbarTheme(options?: { isFooter?: boolean }) {
+  const isFooter = options?.isFooter ?? false;
   const [isOverWhiteBackground, setIsOverWhiteBackground] = useState(false);
   const [currentSectionId, setCurrentSectionId] = useState<string | null>(null);
 
   useEffect(() => {
     const checkBackground = () => {
       const sections = document.querySelectorAll("section");
+      const referenceY = isFooter
+        ? window.innerHeight - REFERENCE_OFFSET
+        : REFERENCE_OFFSET;
       let currentSection: Element | null = null;
 
       if (!currentSection) {
         for (const section of sections) {
           const rect = section.getBoundingClientRect();
 
-          if (rect.top <= 40 && rect.bottom >= 40) {
+          if (rect.top <= referenceY && rect.bottom >= referenceY) {
             currentSection = section;
             break;
           }
@@ -63,7 +69,7 @@ export function useNavbarTheme() {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", checkBackground);
     };
-  }, []);
+  }, [isFooter]);
 
   return { isOverWhiteBackground, currentSectionId };
 }

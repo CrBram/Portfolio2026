@@ -3,7 +3,7 @@ import Typography from "./ui/Typography"
 
 const Hero = () => {
   return (
-    <section className="bg-background-dark h-screen">
+    <section id="hero" className="bg-background-dark h-screen">
       <div className="container pt-26! md:pt-36!">
         <div className="mb-12 sm:mb-30">
           <h2 className="text-tx-light font-share-tech-mono text-base sm:text-xl md:text-2xl">FULL-STACK DEVELOPER</h2>

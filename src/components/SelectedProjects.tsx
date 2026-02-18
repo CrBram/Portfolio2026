@@ -156,10 +156,10 @@ const SelectedProjects = () => {
                   <Chip key={tag} content={tag} />
                 ))}
               </div>
-              <div className="flex flex-wrap justify-between">
+              <div className="flex flex-wrap justify-between pb-6">
                 <div className="w-full md:w-auto">
                   <p className={`font-share-tech-mono ${project.bgDark ? 'text-tx-light' : 'text-tx-dark'} text-base sm:text-lg md:text-xl`}>
-                    SELECTED PROJECTS
+                    SELECTED PROJECT
                   </p>
                   <p className="font-micro5 text-primary text-8xl md:text-9xl -mt-6">
                     #{String(project.id).padStart(2, '0')}

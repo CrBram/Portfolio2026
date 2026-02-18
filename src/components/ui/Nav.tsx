@@ -11,13 +11,23 @@ const Nav = () => {
     { href: "#contact", label: "CONTACT", activeTags: ["contact"] },
   ]
 
+  const handleHashClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href.startsWith('#')) {
+      e.preventDefault();
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  }
+
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-sm transition-colors duration-200`}
     >
       <div className="container">
         <div className="flex items-center justify-between pt-5">
-          <Link to="/">
+          <Link to="#hero" onClick={(e) => handleHashClick(e, "#hero")}>
             {isOverWhiteBackground ? (
               <img src="/images/BC_LOGO_DARK.svg" alt="Logo" className="w-10 h-10 transition-all duration-200" />
             ) : (
