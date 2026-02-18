@@ -34,35 +34,22 @@ const Nav = () => {
               <img src="/images/BC_LOGO_WHITE.svg" alt="Logo" className="w-10 h-10 transition-all duration-200" />
             )}
           </Link>
-          <div className="flex items-center gap-6">
-            <button
-              type="button"
-              className="md:hidden p-2 -m-2"
-              aria-label="Open menu"
-            >
-              <img
-                src="/images/hamburger_white.png"
-                alt=""
-                className={`w-6 h-6 transition-all duration-200 ${isOverWhiteBackground ? "brightness-0" : ""}`}
-              />
-            </button>
-            <div className="hidden md:flex items-center gap-6">
-              {
-                links.map((link) => {
-                  const isActive = currentSectionId ? link.activeTags.includes(currentSectionId) : false
-                  return (
-                    <LinkButton
-                      key={link.href}
-                      href={link.href}
-                      isDarkText={isOverWhiteBackground}
-                      isActive={isActive}
-                    >
-                      {link.label}
-                    </LinkButton>
-                  )
-                })
-              }
-            </div>
+          <div className="flex items-center gap-4 md:gap-6">
+            {
+              links.map((link) => {
+                const isActive = currentSectionId ? link.activeTags.includes(currentSectionId) : false
+                return (
+                  <LinkButton
+                    key={link.href}
+                    href={link.href}
+                    isDarkText={isOverWhiteBackground}
+                    isActive={isActive}
+                  >
+                    {link.label}
+                  </LinkButton>
+                )
+              })
+            }
           </div>
         </div>
       </div>

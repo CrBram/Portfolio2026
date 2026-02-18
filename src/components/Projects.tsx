@@ -55,7 +55,7 @@ const Projects = () => {
   }
 
   return (
-    <section id="all-projects" className="bg-background h-screen">
+    <section id="all-projects" className="bg-background min-h-[55rem] md:h-screen">
       <div className="container py-16! md:py-24!">
         <div className="mb-8 flex flex-col gap-3 md:flex-row md:items-center md:gap-y-3 md:gap-x-8 flex-wrap">
           <button

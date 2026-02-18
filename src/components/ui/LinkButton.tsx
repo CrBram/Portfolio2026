@@ -29,7 +29,7 @@ const LinkButton = (props: LinkButtonProps) => {
         : isDarkText
           ? "text-tx-dark"
           : "text-tx-light"
-        } font-share-tech-mono hover:text-primary transition-colors duration-100`}
+        } font-share-tech-mono hover:text-primary transition-colors duration-100 text-sm md:text-base`}
     >
       <span className="text-primary">[</span>{children}<span className="text-primary">]</span>
     </Link>
