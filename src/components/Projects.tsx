@@ -247,7 +247,7 @@ const Projects = () => {
         </div>
 
         <div
-          className={`pointer-events-none fixed inset-x-0 bottom-6 md:bottom-8 z-20 transition-[opacity,transform] duration-200 ease-out ${activePreviewSrc
+          className={`hidden md:block pointer-events-none fixed inset-x-0 md:bottom-12 z-20 transition-[opacity,transform] duration-200 ease-out ${activePreviewSrc
             ? 'opacity-100 translate-y-0 scale-100'
             : 'opacity-0'
             }`}
