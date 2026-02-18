@@ -156,7 +156,7 @@ const SelectedProjects = () => {
                   <Chip key={tag} content={tag} />
                 ))}
               </div>
-              <div className="flex flex-wrap justify-between pb-6">
+              <div className="flex flex-wrap justify-between md:pb-6">
                 <div className="w-full md:w-auto">
                   <p className={`font-share-tech-mono ${project.bgDark ? 'text-tx-light' : 'text-tx-dark'} text-base sm:text-lg md:text-xl`}>
                     SELECTED PROJECT
