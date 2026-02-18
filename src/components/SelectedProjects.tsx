@@ -134,7 +134,7 @@ const SelectedProjects = () => {
       )}
       <div className="absolute inset-0 bg-background-dark/20" />
 
-      <div className="pt-24 relative z-10">
+      <div className="pt-12 md:pt-24 relative z-10">
         <HorizontalProjectScroll
           text={project.title}
           imageSrc="/images/red_dot.png"
