@@ -18,7 +18,7 @@ const skills = [
 
 const Skills = () => {
   return (
-    <section id="skills" className="bg-background-dark min-h-[100dvh]">
+    <section id="skills" className="bg-background-dark h-screen">
       <div className="container py-16! md:py-24!">
         <div className="md:flex justify-between">
           <div className="w-full md:w-[52%] xl:w-[48%] flex gap-4">
