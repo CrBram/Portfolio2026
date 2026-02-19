@@ -1,4 +1,7 @@
 import SidewaysTitle from "./ui/SidewaysTitle"
+import { useEffect, useRef, useState } from "react"
+import { gsap } from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
 
 const getLogoPath = (tech: string): string => {
   const logoMap: Record<string, string> = {
@@ -55,54 +58,127 @@ const skills = [
       "Accessibility",
     ],
   },
+  {
+    number: "03",
+    title: "OTHER",
+    technologies: [
+      "VS Code",
+      "Terminal",
+      "Git",
+      "GitHub",
+      "GitLab",
+    ],
+  }
 ]
 
 const Skills = () => {
+  const [activeSection, setActiveSection] = useState(0)
+  const skillsSectionRef = useRef<HTMLElement | null>(null)
+
+  useEffect(() => {
+    const section = skillsSectionRef.current
+    if (!section) return
+
+    gsap.registerPlugin(ScrollTrigger)
+
+    const steps = skills.length - 1
+    setActiveSection(0)
+
+    const trigger = ScrollTrigger.create({
+      trigger: section,
+      start: "top top",
+      end: () => `+=${window.innerHeight * Math.max(1, steps)}`,
+      pin: true,
+      pinSpacing: true,
+      scrub: 0.35,
+      invalidateOnRefresh: true,
+      anticipatePin: 1,
+      snap: steps > 0
+        ? {
+          snapTo: (value) => Math.round(value * steps) / steps,
+          duration: { min: 0.25, max: 0.55 },
+          delay: 0.12,
+          ease: "power2.out",
+        }
+        : undefined,
+      onUpdate: (self) => {
+        const nextIndex = Math.min(
+          steps,
+          Math.max(0, Math.round(self.progress * steps))
+        )
+
+        setActiveSection((prev) => (prev === nextIndex ? prev : nextIndex))
+      },
+    })
+
+    return () => {
+      trigger.kill()
+    }
+  }, [])
+
   return (
-    <section id="skills" className="bg-background-dark">
-      <div className="container py-16 md:py-24">
-        <div className="py-16 md:py-24">
-          <div className="flex gap-4 mb-8 md:mb-0">
+    <section
+      id="skills"
+      ref={skillsSectionRef}
+      className="bg-background-dark min-h-screen"
+    >
+      <div className="container py-16 md:py-24 h-full">
+        <div className="py-16 md:py-24 h-full">
+          <div className="flex gap-4">
             <SidewaysTitle>SKILLS</SidewaysTitle>
-            <div className="flex-1">
-              {skills.map((skill, skillIndex) => (
-                <div key={skill.number} className={`md:flex md:justify-between ${skillIndex > 0 ? "mt-12 md:mt-30" : ""}`}>
-                  <div className="w-full md:w-[40%] mb-6 md:mb-0">
+
+            <div className="flex-1 md:flex md:justify-between md:gap-10">
+              <div className="md:w-[40%]">
+                {skills.map((skill, skillIndex) => (
+                  <div
+                    key={skill.number}
+                    className={`transition-opacity duration-500 ${skillIndex > 0 ? "mt-8 md:mt-4" : ""
+                      } ${activeSection === skillIndex ? "opacity-100" : "opacity-35"
+                      }`}
+                  >
                     <div className="flex flex-col">
                       <span className="text-primary font-bold text-sm md:text-base">
                         {skill.number}
                       </span>
-                      <h3 className="text-tx-light font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
+                      <h3
+                        className={`font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl transition-colors duration-500 ${activeSection === skillIndex
+                          ? "text-white"
+                          : "text-tx-light-subtle"
+                          }`}
+                      >
                         {skill.title}
                       </h3>
                     </div>
                   </div>
-                  <div className="w-full md:w-[48%]">
-                    <ul className="space-y-4">
-                      {skill.technologies.map((tech, techIndex) => {
-                        const logoPath = getLogoPath(tech)
-                        return (
-                          <li 
-                            key={tech} 
-                            className={`text-tx-light text-base md:text-lg font-share-tech-mono pb-4 flex items-center justify-between ${
-                              techIndex !== skill.technologies.length - 1 ? "border-b border-tx-light-subtle" : ""
-                            }`}
-                          >
-                            <span>{tech}</span>
-                            {logoPath && (
-                              <img 
-                                src={`/logo/${logoPath}.svg`} 
-                                alt={tech}
-                                className="w-5 h-5 opacity-80 brightness-0 invert"
-                              />
-                            )}
-                          </li>
-                        )
-                      })}
-                    </ul>
-                  </div>
+                ))}
+              </div>
+
+              <div className="w-full md:w-[48%] mt-8 md:mt-0 md:sticky md:top-24 self-start">
+                <div
+                  className="overflow-hidden transition-opacity duration-500"
+                >
+                  <ul className="space-y-4 pt-2 md:pt-0">
+                    {skills[activeSection].technologies.map((tech) => {
+                      const logoPath = getLogoPath(tech)
+                      return (
+                        <li
+                          key={tech}
+                          className="text-tx-light text-base md:text-lg font-share-tech-mono pb-4 flex items-center justify-between border-b border-tx-light-subtle"
+                        >
+                          <span>{tech}</span>
+                          {logoPath && (
+                            <img
+                              src={`/logo/${logoPath}.svg`}
+                              alt={tech}
+                              className="w-5 h-5 opacity-80 brightness-0 invert"
+                            />
+                          )}
+                        </li>
+                      )
+                    })}
+                  </ul>
                 </div>
-              ))}
+              </div>
             </div>
           </div>
         </div>
