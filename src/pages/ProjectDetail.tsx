@@ -110,28 +110,30 @@ function ProjectDetail() {
             ))}
           </div>
 
-          <div className="grid md:grid-cols-3 gap-5 mt-8">
-            <div className="border border-tx-light/10 rounded-sm p-5 bg-background-dark/30">
-              <p className="font-share-tech-mono uppercase text-sm text-tx-light-subtle">
+          <div className="mt-10 border-y border-tx-light/10">
+            <div className="grid md:grid-cols-[11rem_1fr] gap-4 md:gap-8 py-6 border-b border-tx-light/10">
+              <p className="font-share-tech-mono uppercase text-xs tracking-wider text-primary">
                 SUMMARY
               </p>
-              <p className="mt-2 text-tx-light">
+              <p className="text-tx-light leading-relaxed">
                 {project.summary ?? "Short description coming soon."}
               </p>
             </div>
-            <div className="border border-tx-light/10 rounded-sm p-5 bg-background-dark/30">
-              <p className="font-share-tech-mono uppercase text-sm text-tx-light-subtle">
+
+            <div className="grid md:grid-cols-[11rem_1fr] gap-4 md:gap-8 py-6 border-b border-tx-light/10">
+              <p className="font-share-tech-mono uppercase text-xs tracking-wider text-primary">
                 CHALLENGE
               </p>
-              <p className="mt-2 text-tx-light">
+              <p className="text-tx-light leading-relaxed">
                 {project.challenge ?? "Details coming soon."}
               </p>
             </div>
-            <div className="border border-tx-light/10 rounded-sm p-5 bg-background-dark/30">
-              <p className="font-share-tech-mono uppercase text-sm text-tx-light-subtle">
+
+            <div className="grid md:grid-cols-[11rem_1fr] gap-4 md:gap-8 py-6">
+              <p className="font-share-tech-mono uppercase text-xs tracking-wider text-primary">
                 SOLUTION
               </p>
-              <p className="mt-2 text-tx-light">
+              <p className="text-tx-light leading-relaxed">
                 {project.solution ?? "Details coming soon."}
               </p>
             </div>
