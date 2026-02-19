@@ -123,7 +123,7 @@ const Skills = () => {
       className="bg-background-dark min-h-screen"
     >
       <div className="container py-16 md:py-24 h-full">
-        <div className="py-16 md:py-24 h-full">
+        <div className="py-24 md:py-24 h-full">
           <div className="flex gap-4">
             <SidewaysTitle>SKILLS</SidewaysTitle>
 
@@ -132,8 +132,8 @@ const Skills = () => {
                 {skills.map((skill, skillIndex) => (
                   <div
                     key={skill.number}
-                    className={`transition-opacity duration-500 ${skillIndex > 0 ? "mt-8 md:mt-4" : ""
-                      } ${activeSection === skillIndex ? "opacity-100" : "opacity-35"
+                    className={`origin-left transform-gpu will-change-transform transition-all duration-500 ease-out ${skillIndex > 0 ? "mt-2 md:mt-4" : ""
+                      } ${activeSection === skillIndex ? "opacity-100 scale-100" : "opacity-35 scale-95"
                       }`}
                   >
                     <div className="flex flex-col">
@@ -155,9 +155,9 @@ const Skills = () => {
 
               <div className="w-full md:w-[48%] mt-8 md:mt-0 md:sticky md:top-24 self-start">
                 <div
-                  className="overflow-hidden transition-opacity duration-500"
+                  className="transition-opacity duration-500"
                 >
-                  <ul className="space-y-4 pt-2 md:pt-0">
+                  <ul className="space-y-4 pt-2 md:pt-0 max-h-[50vh] overflow-y-auto pr-2 md:max-h-none md:overflow-visible md:pr-0">
                     {skills[activeSection].technologies.map((tech) => {
                       const logoPath = getLogoPath(tech)
                       return (
