@@ -61,12 +61,21 @@ export const projects: Project[] = [
     id: 4,
     slug: "elevate-training",
     title: "ELEVATE TRAINING",
-    backgroundImage: "/images/projects/les-arcs_background.png",
+    backgroundImage:
+      "/images/projects/elevate/Screenshot 2026-02-19 222815.png",
     link: "#",
     tags: ["Next.js", "Tailwind", "Shadcn", "Supabase"],
     year: 2024,
     summary:
       "A training platform concept centered on structured content, progress tracking, and clean UX.",
+    images: [
+      "/images/projects/elevate/Screenshot 2026-02-19 222815.png",
+      "/images/projects/elevate/Screenshot 2026-02-19 222838.png",
+      "/images/projects/elevate/Screenshot 2026-02-19 222908.png",
+      "/images/projects/elevate/Screenshot 2026-02-19 222941.png",
+      "/images/projects/elevate/Screenshot 2026-02-19 223023.png",
+      "/images/projects/elevate/Screenshot 2026-02-19 223048.png",
+    ],
   },
   {
     id: 5,
