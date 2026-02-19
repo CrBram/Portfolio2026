@@ -159,12 +159,13 @@ const Skills = () => {
                   className="transition-opacity duration-500"
                 >
                   <ul className="space-y-4 pt-2 md:pt-0 max-h-[50vh] overflow-y-auto pr-2 md:max-h-none md:overflow-visible md:pr-0">
-                    {skills[activeSection].technologies.map((tech) => {
+                    {skills[activeSection].technologies.map((tech, techIndex, techList) => {
                       const logoPath = getLogoPath(tech)
+                      const isLastItem = techIndex === techList.length - 1
                       return (
                         <li
                           key={tech}
-                          className="text-tx-light text-base md:text-lg font-share-tech-mono pb-4 flex items-center justify-between border-b border-tx-light-subtle"
+                          className={`text-tx-light text-base md:text-lg font-share-tech-mono pb-4 flex items-center justify-between ${isLastItem ? "" : "border-b border-tx-light-subtle"}`}
                         >
                           <span>{tech}</span>
                           {logoPath && (
