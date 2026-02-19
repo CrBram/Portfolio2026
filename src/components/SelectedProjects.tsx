@@ -105,13 +105,23 @@ const SelectedProjects = () => {
       },
     })
 
+    let resizeTimeoutId: ReturnType<typeof setTimeout> | null = null
+
     const handleResize = () => {
-      ScrollTrigger.refresh()
+      if (resizeTimeoutId) {
+        clearTimeout(resizeTimeoutId)
+      }
+      resizeTimeoutId = setTimeout(() => {
+        ScrollTrigger.refresh()
+      }, 180)
     }
 
     window.addEventListener('resize', handleResize)
 
     return () => {
+      if (resizeTimeoutId) {
+        clearTimeout(resizeTimeoutId)
+      }
       window.removeEventListener('resize', handleResize)
       scrollTrigger.kill()
     }

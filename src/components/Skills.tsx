@@ -89,6 +89,7 @@ const Skills = () => {
       start: "top top",
       end: () => `+=${window.innerHeight * Math.max(1, steps)}`,
       pin: true,
+      refreshPriority: -1,
       pinSpacing: true,
       scrub: 0.35,
       invalidateOnRefresh: true,
