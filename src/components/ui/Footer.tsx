@@ -24,7 +24,7 @@ const Footer = () => {
 
   const borderClass = isOverWhiteBackground ? "border-tx-dark/10" : "border-tx-light/10"
   const bgClass = isOverWhiteBackground ? "bg-background/01" : "bg-background-dark/01"
-  const textClass = isOverWhiteBackground ? "text-tx-dark" : "text-tx-light"
+  const textClass = isOverWhiteBackground ? "text-[#24242495]" : "text-[#f8f8f870]"
   const textSubtleClass = isOverWhiteBackground ? "text-tx-dark-subtle" : "text-tx-light-subtle"
 
   return (
@@ -69,6 +69,20 @@ const Footer = () => {
           </div>
           <div className="flex items-center gap-4 flex-shrink-0">
             <span className={textSubtleClass}>© {year}</span>
+            <button
+              type="button"
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              className={`cursor-pointer inline-flex items-center p-0.5 ${linkBase}`}
+              aria-label="Back to top"
+            >
+              <span
+                className="inline-block h-4 w-4 shrink-0 bg-current [mask-size:contain] [mask-repeat:no-repeat] [mask-position:center]"
+                style={{
+                  maskImage: "url(/images/icons/up_icon.svg)",
+                  WebkitMaskImage: "url(/images/icons/up_icon.svg)",
+                }}
+              />
+            </button>
           </div>
         </div>
       </div>
