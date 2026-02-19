@@ -3,10 +3,12 @@ import Chip from "./ui/Chip"
 import SidewaysTitle from "./ui/SidewaysTitle"
 import { projects } from '@/data/projects'
 import { useIsMobile } from "@/hooks/useIsMobile"
+import { useNavigate } from "react-router-dom"
 
 
 const Projects = () => {
   const isMobile = useIsMobile()
+  const navigate = useNavigate()
   const [hoveredProjectId, setHoveredProjectId] = useState<number | null>(null)
   const [selectedTags, setSelectedTags] = useState<string[]>([])
   const [filtersOpen, setFiltersOpen] = useState<boolean>(false)
@@ -52,6 +54,10 @@ const Projects = () => {
       }
       return next
     })
+  }
+
+  const openProject = (slug: string) => {
+    navigate(`/projects/${slug}`)
   }
 
   return (
@@ -119,13 +125,12 @@ const Projects = () => {
                         key={project.id}
                         className="w-full py-2 hover:bg-primary/60 transition-colors duration-100 cursor-pointer focus:outline-none focus-visible:bg-primary/60"
                         onClick={() => {
-                          if (project.link) window.open(project.link, '_blank')
+                          openProject(project.slug)
                         }}
                         onKeyDown={(e) => {
-                          if (!project.link) return
                           if (e.key === 'Enter' || e.key === ' ') {
                             e.preventDefault()
-                            window.open(project.link, '_blank')
+                            openProject(project.slug)
                           }
                         }}
                         onMouseEnter={() => setHoveredProjectId(project.id)}
@@ -134,8 +139,8 @@ const Projects = () => {
                             current === project.id ? null : current
                           )
                         }}
-                        role={project.link ? 'link' : undefined}
-                        tabIndex={project.link ? 0 : -1}
+                        role="link"
+                        tabIndex={0}
                       >
                         <div className="text-tx-dark font-share-tech-mono text-xs uppercase tracking-wider opacity-80">
                           {project.year}
@@ -194,13 +199,12 @@ const Projects = () => {
                             key={project.id}
                             className="align-middle hover:bg-primary/60 transition-colors duration-100 cursor-pointer"
                             onClick={() => {
-                              if (project.link) window.open(project.link, '_blank')
+                              openProject(project.slug)
                             }}
                             onKeyDown={(e) => {
-                              if (!project.link) return
                               if (e.key === 'Enter' || e.key === ' ') {
                                 e.preventDefault()
-                                window.open(project.link, '_blank')
+                                openProject(project.slug)
                               }
                             }}
                             onMouseEnter={() => setHoveredProjectId(project.id)}
@@ -209,8 +213,8 @@ const Projects = () => {
                                 current === project.id ? null : current
                               )
                             }}
-                            role={project.link ? 'link' : undefined}
-                            tabIndex={project.link ? 0 : -1}
+                            role="link"
+                            tabIndex={0}
                           >
                             <td className="pl-4 py-4 pr-4 text-tx-dark text-sm sm:text-base uppercase">
                               <span className="block w-full truncate">

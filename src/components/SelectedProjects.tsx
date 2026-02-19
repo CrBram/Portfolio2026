@@ -5,6 +5,7 @@ import HorizontalProjectScroll from './HorizontalProjectScroll'
 import Button from './ui/Button'
 import { projects as projectsData } from '@/data/projects'
 import Chip from './ui/Chip'
+import { useNavigate } from 'react-router-dom'
 
 const projects = projectsData.filter((project) => project.selected)
 
@@ -15,6 +16,7 @@ const MD_BREAKPOINT = 768
 const SelectedProjects = () => {
   const sectionRef = useRef<HTMLElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
+  const navigate = useNavigate()
   const [currentProjectIndex, setCurrentProjectIndex] = useState(0)
   const [isMdOrLarger, setIsMdOrLarger] = useState(true)
 
@@ -171,11 +173,9 @@ const SelectedProjects = () => {
 
           <Button
             className="w-full md:w-auto"
-            text="VIEW PROJECT"
+            text="VIEW DETAILS"
             onClick={() => {
-              if (project.link) {
-                window.open(project.link, '_blank')
-              }
+              navigate(`/projects/${project.slug}`)
             }}
           />
         </div>

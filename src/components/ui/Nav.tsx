@@ -2,14 +2,26 @@ import { Link } from "react-router-dom"
 import LinkButton from "./LinkButton"
 import { useNavbarTheme } from "@/hooks/useNavbarTheme"
 
-const Nav = () => {
-  const { isOverWhiteBackground, currentSectionId } = useNavbarTheme()
+interface NavLinkItem {
+  href: string
+  label: string
+  activeTags?: string[]
+  forceActive?: boolean
+}
 
-  const links = [
-    { href: "#projects", label: "PROJECTS", activeTags: ["selected-projects", "all-projects"] },
-    { href: "#skills", label: "SKILLS", activeTags: ["skills"] },
-    { href: "#contact", label: "CONTACT", activeTags: ["contact"] },
-  ]
+interface NavProps {
+  logoHref?: string
+  links?: NavLinkItem[]
+}
+
+const defaultLinks: NavLinkItem[] = [
+  { href: "#projects", label: "PROJECTS", activeTags: ["selected-projects", "all-projects"] },
+  { href: "#skills", label: "SKILLS", activeTags: ["skills"] },
+  { href: "#contact", label: "CONTACT", activeTags: ["contact"] },
+]
+
+const Nav = ({ logoHref = "#hero", links = defaultLinks }: NavProps) => {
+  const { isOverWhiteBackground, currentSectionId } = useNavbarTheme()
 
   const handleHashClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     if (href.startsWith('#')) {
@@ -27,7 +39,7 @@ const Nav = () => {
     >
       <div className="container">
         <div className="flex items-center justify-between pt-5">
-          <Link to="#hero" onClick={(e) => handleHashClick(e, "#hero")}>
+          <Link to={logoHref} onClick={(e) => handleHashClick(e, logoHref)}>
             {isOverWhiteBackground ? (
               <img src="/images/BC_LOGO_DARK.svg" alt="Logo" className="w-10 h-10 transition-all duration-200" />
             ) : (
@@ -37,7 +49,11 @@ const Nav = () => {
           <div className="flex items-center gap-4 md:gap-6">
             {
               links.map((link) => {
-                const isActive = currentSectionId ? link.activeTags.includes(currentSectionId) : false
+                const isActive = link.forceActive
+                  ? true
+                  : currentSectionId
+                    ? (link.activeTags ?? []).includes(currentSectionId)
+                    : false
                 return (
                   <LinkButton
                     key={link.href}
