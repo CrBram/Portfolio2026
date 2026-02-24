@@ -23,15 +23,25 @@ export const projects: Project[] = [
     backgroundImage: "/images/projects/orient_background.png",
     backgroundVideo: "/videos/orient_preview_video.mp4",
     link: "https://orient-configurator.vercel.app/",
-    tags: ["React", "Tailwind", "TypeScript", "Three.js"],
+    tags: [
+      "React",
+      "Tailwind",
+      "TypeScript",
+      "Three.js",
+      "Vite",
+      "GSAP",
+      "Zustand",
+      "Blender",
+      "Figma",
+    ],
     selected: true,
     year: 2025,
     summary:
-      "A product configurator focused on visual clarity and smooth interactions for selecting complex options. A product configurator focused on visual clarity and smooth interactions for selecting complex options.A product configurator focused on visual clarity and smooth interactions for selecting complex options.",
+      "A modern interactive 3D configurator for the Orient Bambino series where users explore a scroll-based product showcase and then customize dial, strap, crown, and indicator options in real time. Built with React, TypeScript, React Three Fiber, and Zustand, it combines realistic model rendering, smooth camera motion, and a responsive UI into a seamless product experience.",
     challenge:
-      "Translate technical product combinations into a user flow that feels simple and responsive.",
+      "The key challenge was balancing visual fidelity and runtime performance in the browser: detailed Blender assets (especially straps) are expensive to load, while the configurator still needed fluid camera transitions, instant visual feedback, and a consistent experience across desktop and mobile.",
     solution:
-      "Built a guided React interface with performant rendering and clear step-by-step visual feedback.",
+      "I split the watch into modular GLTF components, used React Three Fiber with Suspense for model loading, managed selections and states with Zustand, and animated transitions with GSAP plus frame-based camera hooks. Heavy assets are loaded only when relevant hotspots are opened, and key models are preloaded strategically to keep interactions smooth without sacrificing detail. I went for a minimalistic and elegant design that is easy to use and navigate and fits the branding of the watch itself.",
     images: [
       "/images/projects/orient_background.png",
       "/images/projects/les-arcs_background.png",
@@ -47,15 +57,25 @@ export const projects: Project[] = [
     backgroundVideo: "/videos/les-arcs_preview_video.mp4",
     link: "https://les-arcs-interactive.vercel.app/",
     bgDark: true,
-    tags: ["React", "Tailwind", "TypeScript", "Three.js", "Rapier"],
+    tags: [
+      "React",
+      "Tailwind",
+      "TypeScript",
+      "Three.js",
+      "Rapier",
+      "Blender",
+      "Figma",
+      "GSAP",
+      "React Context",
+    ],
     selected: true,
     year: 2025,
     summary:
-      "An interactive web experience that combines motion, visuals, and storytelling in a performant frontend.",
+      "An immersive 3D web experience for exploring Les Arcs through a navigable resort overview and village-specific scenes (Arc 1600, Arc 1800, Arc 2000, and Vallandry). Users discover points of interest via interactive cards and voiceovers, with smooth camera transitions, ambient audio, Rapier-powered physics effects, and responsive controls across desktop and mobile.",
     challenge:
-      "Maintain fluid performance while combining advanced visuals and interaction-heavy sections.",
+      "The core challenge was combining large 3D environments, animated camera navigation, particle and post-processing effects, and layered audio without hurting performance or clarity. The experience also had to remain intuitive across multiple routes/scenes while preserving smooth interaction on different device sizes.",
     solution:
-      "Used optimized rendering techniques, lightweight UI architecture, and focused motion design.",
+      "I structured the app as route-based scenes with on-demand GLB loading, used React Three Fiber + Suspense for rendering and asset loading, and built GSAP-driven camera navigation around reusable target presets. React Context centralizes camera, environment, and sound state, while Rapier-powered effects, responsive UI patterns, and controlled Orbit interactions keep the experience both cinematic and usable.",
   },
   {
     id: 4,
