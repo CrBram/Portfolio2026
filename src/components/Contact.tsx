@@ -36,7 +36,7 @@ const Contact = () => {
   }
 
   return (
-    <section id="contact" className="min-h-[52rem] md:h-screen bg-background relative overflow-hidden">
+    <section id="contact" className="min-h-[56rem] md:h-screen bg-background relative overflow-hidden">
       <div className="flex pt-6 md:pt-15 md:pt-0 md:items-center justify-center h-full">
         <div className="container py-16! md:py-24! relative">
           <div className="md:flex justify-between">

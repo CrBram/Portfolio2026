@@ -73,11 +73,26 @@ const skills = [
 
 const Skills = () => {
   const [activeSection, setActiveSection] = useState(0)
+  const [isMobile, setIsMobile] = useState(false)
   const skillsSectionRef = useRef<HTMLElement | null>(null)
 
   useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 767px)")
+    const handleViewportChange = () => {
+      setIsMobile(mediaQuery.matches)
+    }
+
+    handleViewportChange()
+    mediaQuery.addEventListener("change", handleViewportChange)
+
+    return () => {
+      mediaQuery.removeEventListener("change", handleViewportChange)
+    }
+  }, [])
+
+  useEffect(() => {
     const section = skillsSectionRef.current
-    if (!section) return
+    if (!section || isMobile) return
 
     gsap.registerPlugin(ScrollTrigger)
 
@@ -115,7 +130,7 @@ const Skills = () => {
     return () => {
       trigger.kill()
     }
-  }, [])
+  }, [isMobile])
 
   return (
     <section
@@ -129,7 +144,7 @@ const Skills = () => {
             <SidewaysTitle>SKILLS</SidewaysTitle>
 
             <div className="flex-1 md:flex md:justify-between md:gap-10">
-              <div className="md:w-[40%]">
+              <div className="md:w-[40%] hidden md:block">
                 {skills.map((skill, skillIndex) => (
                   <div
                     key={skill.number}
@@ -154,7 +169,7 @@ const Skills = () => {
                 ))}
               </div>
 
-              <div className="w-full md:w-[48%] mt-8 md:mt-0 md:sticky md:top-24 self-start">
+              <div className="w-full md:w-[48%] mt-8 md:mt-0 md:sticky md:top-24 self-start hidden md:block">
                 <div
                   className="transition-opacity duration-500"
                 >
@@ -180,6 +195,43 @@ const Skills = () => {
                     })}
                   </ul>
                 </div>
+              </div>
+
+              <div className="w-full md:hidden space-y-10 mt-6">
+                {skills.map((skill) => (
+                  <div key={`${skill.number}-mobile`}>
+                    <div className="flex flex-col mb-4">
+                      <span className="text-primary font-bold text-sm">
+                        {skill.number}
+                      </span>
+                      <h3 className="font-bold text-3xl sm:text-4xl text-white">
+                        {skill.title}
+                      </h3>
+                    </div>
+
+                    <ul className="space-y-4">
+                      {skill.technologies.map((tech, techIndex, techList) => {
+                        const logoPath = getLogoPath(tech)
+                        const isLastItem = techIndex === techList.length - 1
+                        return (
+                          <li
+                            key={`${skill.number}-${tech}`}
+                            className={`text-tx-light text-base font-share-tech-mono pb-4 flex items-center justify-between ${isLastItem ? "" : "border-b border-tx-light-subtle"}`}
+                          >
+                            <span>{tech}</span>
+                            {logoPath && (
+                              <img
+                                src={`/logo/${logoPath}.svg`}
+                                alt={tech}
+                                className="w-5 h-5 opacity-80 brightness-0 invert"
+                              />
+                            )}
+                          </li>
+                        )
+                      })}
+                    </ul>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
