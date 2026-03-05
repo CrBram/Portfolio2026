@@ -13,7 +13,7 @@ const Hero = () => {
             BRAM C<span className="text-primary">.</span>
           </Typography>
         </div>
-        <div className="md:pb-16">
+        <div className="sm:pb-16">
           <LCDScreen />
         </div>
       </div>
