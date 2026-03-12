@@ -21,7 +21,7 @@ import {
   SiVuedotjs,
 } from "react-icons/si"
 import { TbBrandAdobeIllustrator, TbBrandAdobePhotoshop } from "react-icons/tb"
-import { LuTouchpad } from "react-icons/lu"
+import { GrTechnology } from "react-icons/gr"
 
 const getTechIcon = (tech: string): IconType | null => {
   const iconMap: Record<string, IconType> = {
@@ -42,7 +42,7 @@ const getTechIcon = (tech: string): IconType | null => {
     "Bitbucket": SiBitbucket,
     "Blender": SiBlender,
     "Unreal Engine": SiUnrealengine,
-    "Touchdesigner": LuTouchpad,
+    "Touchdesigner": GrTechnology,
   }
   return iconMap[tech] || null
 }
