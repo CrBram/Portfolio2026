@@ -101,6 +101,14 @@ const Contact = () => {
                       onClick={handleSubmit(onSubmit)}
                       disabled={status === "sending"}
                     />
+                    {status === "success" && (
+                      <p className="text-sm text-primary text-center">Thanks for contacting me!</p>
+                    )}
+                    {status === "error" && (
+                      <p className="text-sm text-tx-light-subtle text-center">
+                        Something went wrong. Please try again.
+                      </p>
+                    )}
                   </div>
                 </form>
               </div>
