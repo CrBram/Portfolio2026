@@ -21,7 +21,7 @@ export const projects: Project[] = [
     id: 1,
     slug: "orient-configurator",
     title: "ORIENT CONFIGURATOR",
-    backgroundImage: "/images/projects/orient_background.png",
+    backgroundImage: "/images/projects/configurator/configurator_mockup_1.png",
     backgroundVideo: "/videos/orient_preview_video.mp4",
     link: "https://orient-configurator.vercel.app/",
     tags: [
@@ -42,19 +42,20 @@ export const projects: Project[] = [
     challenge:
       "The main challenge was delivering high-fidelity 3D models and smooth camera motion in the browser without sacrificing load times or responsiveness across devices.",
     solution:
-      "We split the watch into modular GLTF components and used React Three Fiber with Suspense for controlled loading, while Zustand manages configuration state and GSAP powers camera transitions. Heavy assets are only loaded when needed and key models are preloaded strategically, resulting in a minimal, brand-fit UI that stays fast and fluid.",
+      "I split the watch into modular GLTF components and used React Three Fiber with Suspense for controlled loading, while Zustand manages configuration state and GSAP powers camera transitions. Heavy assets are only loaded when needed and key models are preloaded strategically, resulting in a minimal, brand-fit UI that stays fast and fluid.",
     images: [
-      "/images/projects/orient_background.png",
-      "/images/projects/les-arcs_background.png",
-      "/images/projects/les-arcs_background.png",
-      "/images/projects/orient_background.png",
+      "/images/projects/configurator/configurator_mockup_1.png",
+      "/images/projects/configurator/configurator_mockup_2.png",
+      "/images/projects/configurator/configurator_mockup_3.png",
+      "/images/projects/configurator/configurator_mockup_4.png",
+      "/images/projects/configurator/configurator_mockup_5.png",
     ],
   },
   {
     id: 2,
     slug: "les-arcs",
     title: "LES ARCS",
-    backgroundImage: "/images/projects/les-arcs_background.png",
+    backgroundImage: "/images/projects/lesarcs/lesarcs_mockup_1.png",
     backgroundVideo: "/videos/les-arcs_preview_video.mp4",
     link: "https://les-arcs-interactive.vercel.app/",
     bgDark: true,
@@ -76,13 +77,20 @@ export const projects: Project[] = [
     challenge:
       "The challenge was to combine large 3D environments, guided camera navigation, particle and post-processing effects and layered audio without losing clarity, performance or usability across devices and routes.",
     solution:
-      "We structured the app as route-based scenes with on-demand GLB loading in React Three Fiber and built GSAP-driven camera navigation around reusable presets. Shared React Context manages camera, environment and audio state, while Rapier effects and responsive UI patterns keep the experience cinematic but still intuitive to control.",
+      "I structured the app as route-based scenes with on-demand GLB loading in React Three Fiber and built GSAP-driven camera navigation around reusable presets. Shared React Context manages camera, environment and audio state, while Rapier effects and responsive UI patterns keep the experience cinematic but still intuitive to control.",
+    images: [
+      "/images/projects/lesarcs/lesarcs_mockup_1.png",
+      "/images/projects/lesarcs/lesarcs_mockup_2.png",
+      "/images/projects/lesarcs/lesarcs_mockup_3.png",
+      "/images/projects/lesarcs/lesarcs_mockup_4.png",
+      "/images/projects/lesarcs/lesarcs_mockup_5.png",
+    ],
   },
   {
     id: 4,
     slug: "elevate-training",
     title: "ELEVATE TRAINING",
-    backgroundImage: "/images/projects/elevate/elevate_1.png",
+    backgroundImage: "/images/projects/elevate/elevate_mockup_1.png",
     link: "#",
     tags: ["Next.js", "Tailwind", "Shadcn", "Supabase"],
     year: 2024,
@@ -91,13 +99,15 @@ export const projects: Project[] = [
     challenge:
       "The main challenge was designing a simple interface that still supports different roles, sharing rules and access levels without confusing users or leaking data.",
     solution:
-      "We built the platform in Next.js with a role-based auth system on Supabase that cleanly separates permissions for athletes and coaches. Each program gets its own shareable URL and visibility rules, so schedules can be created, duplicated and shared confidently while the interface stays lightweight and focused.",
+      "I built the platform in Next.js with a role-based auth system on Supabase that cleanly separates permissions for athletes and coaches. Each program gets its own shareable URL and visibility rules, so schedules can be created, duplicated and shared confidently while the interface stays lightweight and focused.",
     images: [
-      "/images/projects/elevate/elevate_1.png",
-      "/images/projects/elevate/elevate_2.png",
-      "/images/projects/elevate/elevate_3.png",
-      "/images/projects/elevate/elevate_4.png",
-      "/images/projects/elevate/elevate_5.png",
+      "/images/projects/elevate/elevate_mockup_1.png",
+      "/images/projects/elevate/elevate_mockup_2.png",
+      "/images/projects/elevate/elevate_mockup_3.png",
+      "/images/projects/elevate/elevate_mockup_4.png",
+      "/images/projects/elevate/elevate_mockup_5.png",
+      "/images/projects/elevate/elevate_mockup_6.png",
+      "/images/projects/elevate/elevate_mockup_7.png",
     ],
   },
   {
