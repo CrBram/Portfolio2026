@@ -133,19 +133,46 @@ function ProjectDetail() {
               <p className="font-share-tech-mono uppercase text-xs tracking-wider text-primary">
                 SOLUTION
               </p>
-              <p className="text-tx-light leading-relaxed">
-                {project.solution ?? "Details coming soon."}
-              </p>
+              <div>
+                <p className="text-tx-light leading-relaxed">
+                  {project.solution ?? "Details coming soon."}
+                </p>
+                {project.credits && project.credits.length > 0 && (
+                  <p className="text-tx-light-subtle leading-relaxed text-sm mt-3">
+                    Built together with{" "}
+                    {project.credits.map((credit, index) => (
+                      <span key={credit.url}>
+                        {index > 0 && ", "}
+                        <a
+                          href={credit.url}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="underline underline-offset-2 hover:text-primary transition-colors duration-100"
+                        >
+                          {credit.name}
+                        </a>
+                      </span>
+                    ))}
+                    .
+                  </p>
+                )}
+              </div>
             </div>
           </div>
 
-          <ProjectGallery title={project.title} images={galleryImages} className="mt-10" />
+          <ProjectGallery
+            title={project.title}
+            images={galleryImages}
+            className="mt-10"
+          />
 
           <div className="mt-10 flex flex-wrap gap-3">
             {hasLiveLink && (
               <Button
                 text="VISIT LIVE"
-                onClick={() => window.open(project.link, "_blank", "noopener,noreferrer")}
+                onClick={() =>
+                  window.open(project.link, "_blank", "noopener,noreferrer")
+                }
               />
             )}
           </div>
