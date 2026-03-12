@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
+import ImageLightbox from "./ui/ImageLightbox";
 
 interface ProjectGalleryProps {
   title: string;
@@ -18,6 +19,7 @@ function ProjectGallery({
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
   const [canScrollPrev, setCanScrollPrev] = useState(false);
   const [canScrollNext, setCanScrollNext] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: "start",
@@ -70,6 +72,28 @@ function ProjectGallery({
     emblaApi.scrollNext();
   };
 
+  const closeLightbox = () => {
+    setLightboxIndex(null);
+  };
+
+  const openLightbox = (index: number) => {
+    setLightboxIndex(index);
+  };
+
+  const showPreviousLightboxImage = () => {
+    setLightboxIndex((current) => {
+      if (current === null) return null;
+      return (current - 1 + images.length) % images.length;
+    });
+  };
+
+  const showNextLightboxImage = () => {
+    setLightboxIndex((current) => {
+      if (current === null) return null;
+      return (current + 1) % images.length;
+    });
+  };
+
   return (
     <div className={className}>
       <div className="flex items-center justify-between mb-3">
@@ -86,13 +110,18 @@ function ProjectGallery({
         <div className="-ml-3 flex">
           {images.map((src, index) => (
             <div key={`${src}-${index}`} className="pl-3 basis-1/3 shrink-0 grow-0 min-w-0">
-              <div className="relative overflow-hidden h-[22vh] md:h-[32vh] bg-background-dark rounded-sm border border-tx-light/10">
+              <button
+                type="button"
+                onClick={() => openLightbox(index)}
+                className="group relative block w-full overflow-hidden h-[22vh] md:h-[32vh] bg-background-dark rounded-sm border border-tx-light/10 cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-primary/80"
+                aria-label={`Open image ${index + 1} in lightbox`}
+              >
                 <img
                   src={src}
                   alt={`${title} screenshot ${index + 1}`}
-                  className="h-full w-full object-cover"
+                  className="h-full w-full object-cover transition-transform duration-200 group-hover:scale-102"
                 />
-              </div>
+              </button>
             </div>
           ))}
         </div>
@@ -148,6 +177,15 @@ function ProjectGallery({
           </div>
         </div>
       )}
+
+      <ImageLightbox
+        title={title}
+        images={images}
+        activeIndex={lightboxIndex}
+        onClose={closeLightbox}
+        onPrevious={showPreviousLightboxImage}
+        onNext={showNextLightboxImage}
+      />
     </div>
   );
 }
