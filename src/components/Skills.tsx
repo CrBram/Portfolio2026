@@ -211,7 +211,7 @@ const Skills = () => {
                 </div>
               </div>
 
-              <div className="w-full md:hidden space-y-10 mt-6">
+              <div className="w-full md:hidden space-y-10 md:mt-6">
                 {skills.map((skill) => (
                   <div key={`${skill.number}-mobile`}>
                     <div className="flex flex-col mb-4">
