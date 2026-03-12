@@ -82,8 +82,7 @@ export const projects: Project[] = [
     id: 4,
     slug: "elevate-training",
     title: "ELEVATE TRAINING",
-    backgroundImage:
-      "/images/projects/elevate/Screenshot 2026-02-19 222815.png",
+    backgroundImage: "/images/projects/elevate/elevate_1.png",
     link: "#",
     tags: ["Next.js", "Tailwind", "Shadcn", "Supabase"],
     year: 2024,
@@ -94,12 +93,11 @@ export const projects: Project[] = [
     solution:
       "We built the platform in Next.js with a role-based auth system on Supabase that cleanly separates permissions for athletes and coaches. Each program gets its own shareable URL and visibility rules, so schedules can be created, duplicated and shared confidently while the interface stays lightweight and focused.",
     images: [
-      "/images/projects/elevate/Screenshot 2026-02-19 222815.png",
-      "/images/projects/elevate/Screenshot 2026-02-19 222838.png",
-      "/images/projects/elevate/Screenshot 2026-02-19 222908.png",
-      "/images/projects/elevate/Screenshot 2026-02-19 222941.png",
-      "/images/projects/elevate/Screenshot 2026-02-19 223023.png",
-      "/images/projects/elevate/Screenshot 2026-02-19 223048.png",
+      "/images/projects/elevate/elevate_1.png",
+      "/images/projects/elevate/elevate_2.png",
+      "/images/projects/elevate/elevate_3.png",
+      "/images/projects/elevate/elevate_4.png",
+      "/images/projects/elevate/elevate_5.png",
     ],
   },
   {
