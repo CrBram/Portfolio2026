@@ -130,7 +130,8 @@ export const projects: Project[] = [
     id: 6,
     slug: "pironne",
     title: "PIRONNE",
-    backgroundImage: "/images/projects/les-arcs_background.png",
+    backgroundImage:
+      "/images/projects/pironne/66f69582f4ab7655bebcba9f_Monospace_Pironne-p-2000.jpg",
     link: "#",
     tags: ["Next.js", "Nodejs", "Prisma", "Material UI"],
     year: 2023,
@@ -140,6 +141,13 @@ export const projects: Project[] = [
       "Pironne’s offer process combined many variables, formulas and bespoke arrangements, making it hard to keep proposals consistent and efficient while still feeling tailor‑made. They needed a system that stayed understandable for visitors but remained workable and maintainable for the team.",
     solution:
       "We first prototyped the full flow—from entering parameters to automatically calculating and assembling quotes—then built a custom Next.js and React application backed by a flexible API. The tool lets the team respond faster, reduce manual work and manage price combinations consistently, while the digital layer aligns with the venue’s identity so more time goes into hospitality and service instead of administration.",
+    images: [
+      "/images/projects/pironne/66f69582f4ab7655bebcba9f_Monospace_Pironne-p-2000.jpg",
+      "/images/projects/pironne/66f695822b98e51ec84cd58a_Monospace_Pironne-1-p-2000.jpg",
+      "/images/projects/pironne/66f69582cc4370a99d5ff66e_Monospace_Pironne-3-p-2000.jpg",
+      "/images/projects/pironne/66f6958bcc4370a99d5ffd45_Monospace_Pironne-4-p-2000.jpg",
+      "/images/projects/pironne/66f6958b44aa2f85f93cc023_Monospace_Pironne-6-p-2000.jpg",
+    ],
     credits: [{ name: "Monospace", url: "https://www.monospace.be/" }],
   },
   {
