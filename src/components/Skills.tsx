@@ -34,14 +34,14 @@ const skills = [
     technologies: [
       "React",
       "Next.js",
+      "Vue.js",
+      "Astro",
+      ".NET",
       "TypeScript",
       "JavaScript",
       "HTML",
       "CSS",
-      "Tailwind CSS",
-      "Node.js",
-      "Git",
-      "Vite",
+      "Prisma"
     ],
   },
   {
@@ -49,24 +49,19 @@ const skills = [
     title: "DESIGN",
     technologies: [
       "Figma",
-      "UI/UX Design",
-      "Wireframing",
-      "Prototyping",
-      "User Research",
-      "Design Systems",
-      "Responsive Design",
-      "Accessibility",
+      "Photoshop",
+      "Illustrator",
     ],
   },
   {
     number: "03",
     title: "OTHER",
     technologies: [
-      "VS Code",
-      "Terminal",
-      "Git",
-      "GitHub",
-      "GitLab",
+      "Github",
+      "Bitbucket",
+      "Blender",
+      "Unreal Engine",
+      "Touchdesigner",
     ],
   }
 ]
@@ -169,7 +164,7 @@ const Skills = () => {
                 ))}
               </div>
 
-              <div className="w-full md:w-[48%] mt-8 md:mt-0 md:sticky md:top-24 self-start hidden md:block">
+              <div className="w-full md:w-[48%] max-h-[90vh] overflow-y-auto mt-8 md:mt-0 md:sticky md:top-24 self-start hidden md:block">
                 <div
                   className="transition-opacity duration-500"
                 >
