@@ -2,29 +2,49 @@ import SidewaysTitle from "./ui/SidewaysTitle"
 import { useEffect, useRef, useState } from "react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
+import type { IconType } from "react-icons"
+import {
+  SiAstro,
+  SiBitbucket,
+  SiBlender,
+  SiCss,
+  SiDotnet,
+  SiFigma,
+  SiGithub,
+  SiHtml5,
+  SiJavascript,
+  SiNextdotjs,
+  SiPrisma,
+  SiReact,
+  SiTypescript,
+  SiUnrealengine,
+  SiVuedotjs,
+} from "react-icons/si"
+import { TbBrandAdobeIllustrator, TbBrandAdobePhotoshop } from "react-icons/tb"
+import { LuTouchpad } from "react-icons/lu"
 
-const getLogoPath = (tech: string): string => {
-  const logoMap: Record<string, string> = {
-    "React": "react",
-    "Next.js": "nextjs",
-    "TypeScript": "typescript",
-    "JavaScript": "javascript",
-    "HTML": "html",
-    "CSS": "css",
-    "Tailwind CSS": "tailwind",
-    "Node.js": "nodejs",
-    "Git": "git",
-    "Vite": "vite",
-    "Figma": "figma",
-    "UI/UX Design": "uiux",
-    "Wireframing": "wireframing",
-    "Prototyping": "prototyping",
-    "User Research": "user-research",
-    "Design Systems": "design-systems",
-    "Responsive Design": "responsive-design",
-    "Accessibility": "accessibility",
+const getTechIcon = (tech: string): IconType | null => {
+  const iconMap: Record<string, IconType> = {
+    "React": SiReact,
+    "Next.js": SiNextdotjs,
+    "Vue.js": SiVuedotjs,
+    "Astro": SiAstro,
+    ".NET": SiDotnet,
+    "TypeScript": SiTypescript,
+    "JavaScript": SiJavascript,
+    "HTML": SiHtml5,
+    "CSS": SiCss,
+    "Prisma": SiPrisma,
+    "Figma": SiFigma,
+    "Photoshop": TbBrandAdobePhotoshop,
+    "Illustrator": TbBrandAdobeIllustrator,
+    "Github": SiGithub,
+    "Bitbucket": SiBitbucket,
+    "Blender": SiBlender,
+    "Unreal Engine": SiUnrealengine,
+    "Touchdesigner": LuTouchpad,
   }
-  return logoMap[tech] || ""
+  return iconMap[tech] || null
 }
 
 const skills = [
@@ -170,7 +190,7 @@ const Skills = () => {
                 >
                   <ul className="space-y-4 pt-2 md:pt-0 max-h-[50vh] overflow-y-auto pr-2 md:max-h-none md:overflow-visible md:pr-0">
                     {skills[activeSection].technologies.map((tech, techIndex, techList) => {
-                      const logoPath = getLogoPath(tech)
+                      const TechIcon = getTechIcon(tech)
                       const isLastItem = techIndex === techList.length - 1
                       return (
                         <li
@@ -178,11 +198,10 @@ const Skills = () => {
                           className={`text-tx-light text-base md:text-lg font-share-tech-mono pb-4 flex items-center justify-between ${isLastItem ? "" : "border-b border-tx-light-subtle"}`}
                         >
                           <span>{tech}</span>
-                          {logoPath && (
-                            <img
-                              src={`/logo/${logoPath}.svg`}
-                              alt={tech}
-                              className="w-5 h-5 opacity-80 brightness-0 invert"
+                          {TechIcon && (
+                            <TechIcon
+                              aria-hidden="true"
+                              className="w-5 h-5 text-white opacity-80"
                             />
                           )}
                         </li>
@@ -206,7 +225,7 @@ const Skills = () => {
 
                     <ul className="space-y-4">
                       {skill.technologies.map((tech, techIndex, techList) => {
-                        const logoPath = getLogoPath(tech)
+                        const TechIcon = getTechIcon(tech)
                         const isLastItem = techIndex === techList.length - 1
                         return (
                           <li
@@ -214,11 +233,10 @@ const Skills = () => {
                             className={`text-tx-light text-base font-share-tech-mono pb-4 flex items-center justify-between ${isLastItem ? "" : "border-b border-tx-light-subtle"}`}
                           >
                             <span>{tech}</span>
-                            {logoPath && (
-                              <img
-                                src={`/logo/${logoPath}.svg`}
-                                alt={tech}
-                                className="w-5 h-5 opacity-80 brightness-0 invert"
+                            {TechIcon && (
+                              <TechIcon
+                                aria-hidden="true"
+                                className="w-5 h-5 text-white opacity-80"
                               />
                             )}
                           </li>
